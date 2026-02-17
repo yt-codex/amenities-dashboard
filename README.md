@@ -1,53 +1,105 @@
-# SG Amenities Dashboard (Milestone 0)
+# SG Amenities Dashboard (Milestone 2)
 
-This project builds a shareable static web dashboard (hosted on GitHub Pages) that maps Singapore planning areas and shades them by amenity supply.
-Data processing will run in Google Apps Script and publish compact JSON artifacts for the frontend.
+This project builds a shareable static web dashboard (hosted on GitHub Pages) that maps Singapore planning areas and subzones.
+Data processing runs in Google Apps Script and publishes JSON endpoints consumed by the frontend.
 A quarterly Apps Script trigger (time-based) will refresh snapshots; GitHub Actions scheduling is explicitly out of scope.
-The dashboard data model uses planning-area level aggregates rather than raw OSM tag blobs to keep payloads compact.
-The panel output will be `snapshot_quarter, planning_area, category, count`.
-Resident denominators are versioned as `denom_vintage_date, planning_area, age_group, residents` and mapped to snapshots.
-Frontend metrics will support absolute counts and per-1,000 resident rates.
-The denominator toggle must support age groups: ALL, 0–6, 13–18, and 65+.
-Amenity categories are fixed to exactly six: GP clinics, Dental, Childcare/preschool, Secondary schools, Supermarkets, Eldercare facilities.
-Malls, MRT stations, and primary schools are explicitly excluded from scope.
-Milestones are implemented incrementally with tests/checkpoints before moving forward.
 
-## Architecture (planned)
+## Architecture (current)
 
 ```text
-[Overpass API + boundary/denominator sources]
-                |
-                v
-      [Google Apps Script ETL]
-                |
-     (quarterly time trigger)
-                |
-                v
-   [Compact JSON snapshot artifacts]
-                |
-                v
- [GitHub Pages static frontend (/web)]
-                |
-                v
- [Map + category/metric/denominator/snapshot controls]
+[Google Apps Script JSON endpoints] ---> [GitHub Pages static frontend (/web)] ---> [Leaflet map + debug panels]
 ```
 
-## Constraints
+## Milestone 2 scope delivered
 
-- No GitHub Actions scheduler; only Google Apps Script time-based triggers for refresh.
-- Keep data compact: planning-area aggregates + compact denominator tables only.
-- Support exactly 6 amenity categories (GP clinics, Dental, Childcare/preschool, Secondary schools, Supermarkets, Eldercare facilities).
-- Dashboard metric toggle must include absolute counts and per-1,000 residents.
-- Denominator toggle must include age groups: ALL, 0–6, 13–18, 65+.
+- Leaflet map scaffold with geography toggle (Planning Area vs Subzone).
+- Local GeoJSON loading from `/web/assets/planning_area.geojson` and `/web/assets/subzone.geojson`.
+- Hover tooltip name display and click-to-inspect raw feature properties.
+- Denominator debug panel with:
+  - index fetch (`route=index`)
+  - sample fetch (`route=denoms&geo=<pa|sz>&year=<vintage>`)
+  - basic request/error status rendering
+  - in-memory index caching to avoid repeated requests
 
-## Milestones (0–8)
+No choropleth shading, amenities extraction, quarterly snapshots, or denominator mapping is included in this milestone.
 
-- **Milestone 0:** Repo skeleton and architecture docs only (no ingestion or app logic).
-- **Milestone 1:** Define schemas/contracts for panel output, denominator vintages, and snapshot metadata.
-- **Milestone 2:** Build a tiny static frontend shell with fixed controls and mock data wiring.
-- **Milestone 3:** Add planning-area geometry loading and choropleth rendering with placeholder values.
-- **Milestone 4:** Implement Apps Script scaffolding for ETL pipeline stages and config management.
-- **Milestone 5:** Implement denominator ingestion/version mapping (SingStat primary, Census fallback).
-- **Milestone 6:** Implement OSM category queries/aggregation to planning-area counts (compact outputs only).
-- **Milestone 7:** Wire published snapshots to frontend selectors and compute robust per-1,000 rates.
-- **Milestone 8:** Add quarterly trigger automation, validation checks, and deployment/readiness docs.
+## Milestone 2 Runbook
+
+### 1) Configure Apps Script endpoint
+
+Edit `web/config.js` and set:
+
+```js
+export const CONFIG = {
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/.../exec",
+};
+```
+
+`app.js` builds API URLs from this base and calls:
+
+- `?route=index`
+- `?route=denoms&geo=pa|sz&year=<vintage>`
+
+If `APPS_SCRIPT_URL` is missing/invalid, the UI shows a visible warning and blocks denominator fetch actions.
+
+### 2) Run locally (important)
+
+Do **not** open `web/index.html` via `file://` because browser fetches for local GeoJSON can fail due to CORS/security rules.
+
+From repo root:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open:
+
+- `http://localhost:8000/web/`
+
+### 3) Deploy to GitHub Pages
+
+1. Push this repository to GitHub.
+2. In **Settings → Pages**, choose source branch (for example `main`) and folder (`/root` if serving repo root).
+3. Ensure `/web` files are committed.
+4. Visit `https://<org-or-user>.github.io/<repo>/web/`.
+
+### 4) Checkpoints A–C
+
+#### Checkpoint A — geometry + layer controls
+
+- Open `/web/`.
+- Confirm map tiles load.
+- Switch geography selector between **Planning Area** and **Subzone**.
+- Confirm polygons swap.
+- Hover polygon and verify tooltip shows name.
+  - Planning area tooltip uses `PLN_AREA_N` (fallback candidates are implemented in code).
+  - Subzone tooltip uses `SUBZONE_N` (fallback candidates are implemented in code).
+- Click polygon and verify side panel shows raw feature JSON.
+
+#### Checkpoint B — denominator index
+
+- Click **Load Denominator Index**.
+- Confirm output shows:
+  - `vintages`
+  - `age_groups`
+  - `geos`
+  - `updated_at`
+- Confirm `denom_year` dropdown is populated from `vintages`.
+
+#### Checkpoint C — denominator sample
+
+- Choose `denom_geo` (`pa` or `sz`) and `denom_year`.
+- Click **Fetch Denominator Sample**.
+- Confirm output shows:
+  - `rows_count`
+  - `first_5_rows`
+
+## Notes on boundary files
+
+The files in `web/assets` are placeholders for Milestone 2 wiring validation.
+Replace with simplified authoritative GeoJSON exports from:
+
+- Planning Area Boundary (No Sea) — URA Master Plan 2019 via data.gov.sg
+- Subzone Boundary — SVY21 via data.gov.sg
+
+Keep files simplified to preserve frontend performance on GitHub Pages.
