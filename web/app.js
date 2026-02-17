@@ -1,12 +1,67 @@
 import { CONFIG } from "./config.js";
 
-const CATEGORIES = {
-  gp_clinics: "GP Clinics",
+const FALLBACK_CATEGORY_ORDER = [
+  "gp_clinics",
+  "dental",
+  "childcare_preschool",
+  "primary_schools",
+  "secondary_schools",
+  "supermarkets",
+  "eldercare",
+];
+
+const CATEGORY_LABELS = {
+  gp_clinics: "GP clinics",
   dental: "Dental",
-  childcare_preschool: "Childcare & Preschool",
-  secondary_schools: "Secondary Schools",
+  childcare_preschool: "Childcare / preschool",
+  primary_schools: "Primary schools",
+  secondary_schools: "Secondary schools",
   supermarkets: "Supermarkets",
-  eldercare: "Eldercare",
+  eldercare: "Eldercare facilities",
+};
+
+const CATEGORY_INFO = {
+  gp_clinics: {
+    title: "GP clinics",
+    source: "Source: OpenStreetMap",
+    includes: "Includes: doctor/clinic tags (GP-type outpatient clinics).",
+  },
+  dental: {
+    title: "Dental",
+    source: "Source: OpenStreetMap",
+    includes: "Includes: dentist tags (dental clinics / practices).",
+  },
+  childcare_preschool: {
+    title: "Childcare / preschool",
+    source: "Source: OpenStreetMap",
+    includes: "Includes: childcare + kindergarten-related tags.",
+  },
+  primary_schools: {
+    title: "Primary schools",
+    source: "Source: MOE directory + OneMap geocode",
+    includes: "Includes: MOE-listed primary schools (geocoded).",
+  },
+  secondary_schools: {
+    title: "Secondary schools",
+    source: "Source: MOE directory + OneMap geocode",
+    includes: "Includes: MOE-listed secondary schools (geocoded).",
+  },
+  supermarkets: {
+    title: "Supermarkets",
+    source: "Source: OpenStreetMap",
+    includes: "Includes: shop=supermarket.",
+  },
+  eldercare: {
+    title: "Eldercare facilities",
+    source: "Source: OpenStreetMap",
+    includes: "Includes: nursing homes / assisted living / day care type social facilities.",
+  },
+};
+
+const DEFAULT_CATEGORY_INFO = {
+  title: "Category",
+  source: "Source: —",
+  includes: "No definition available.",
 };
 
 const AGE_GROUPS = [
@@ -39,6 +94,11 @@ const MISSING_COLOR = "#d5d8dc";
 const ui = {
   geoSelect: document.getElementById("geoSelect"),
   categorySelect: document.getElementById("categorySelect"),
+  categoryInfoButton: document.getElementById("categoryInfoButton"),
+  categoryInfoTooltip: document.getElementById("categoryInfoTooltip"),
+  categoryInfoTitle: document.getElementById("categoryInfoTitle"),
+  categoryInfoSource: document.getElementById("categoryInfoSource"),
+  categoryInfoIncludes: document.getElementById("categoryInfoIncludes"),
   snapshotSelect: document.getElementById("snapshotSelect"),
   metricSelect: document.getElementById("metricSelect"),
   ageGroupSelect: document.getElementById("ageGroupSelect"),
@@ -75,6 +135,7 @@ const state = {
   controllers: {
     render: null,
   },
+  availableCategories: [...FALLBACK_CATEGORY_ORDER],
   selection: {
     geo: "pa",
     category: "gp_clinics",
@@ -115,6 +176,53 @@ function asRows(payload) {
   if (Array.isArray(data?.rows)) return data.rows;
   if (Array.isArray(data?.items)) return data.items;
   return [];
+}
+
+
+function getCategoryLabel(key) {
+  return CATEGORY_LABELS[key] || key;
+}
+
+function getCategoryInfo(key) {
+  return CATEGORY_INFO[key] || DEFAULT_CATEGORY_INFO;
+}
+
+function getCategoriesFromIndex(indexPayload) {
+  const data = indexPayload?.data ?? indexPayload;
+  const categories = data?.categories || data?.amenities || data?.keys || [];
+  const normalized = [...new Set(categories.map((item) => String(item || "").trim()).filter(Boolean))];
+  const sortedKnown = FALLBACK_CATEGORY_ORDER.filter((key) => normalized.includes(key));
+  const remaining = normalized.filter((key) => !sortedKnown.includes(key)).sort();
+  return [...sortedKnown, ...remaining];
+}
+
+function setCategoryOptions(categories) {
+  ui.categorySelect.innerHTML = "";
+  categories.forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = getCategoryLabel(value);
+    ui.categorySelect.appendChild(option);
+  });
+}
+
+function updateCategoryInfoTooltip() {
+  const info = getCategoryInfo(state.selection.category);
+  ui.categoryInfoTitle.textContent = info.title;
+  ui.categoryInfoSource.textContent = info.source;
+  ui.categoryInfoIncludes.textContent = info.includes;
+}
+
+function closeCategoryInfoTooltip() {
+  ui.categoryInfoTooltip.hidden = true;
+  ui.categoryInfoButton.setAttribute("aria-expanded", "false");
+}
+
+function toggleCategoryInfoTooltip(forceOpen) {
+  const isOpen = !ui.categoryInfoTooltip.hidden;
+  const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !isOpen;
+  ui.categoryInfoTooltip.hidden = !shouldOpen;
+  ui.categoryInfoButton.setAttribute("aria-expanded", String(shouldOpen));
 }
 
 function normalizeName(value) {
@@ -315,8 +423,9 @@ function formatMetric(v, metric) {
   return metric === "PER_1000" ? v.toFixed(2) : String(Math.round(v));
 }
 
-function updateLegend(metric, breaks) {
-  ui.legendTitle.textContent = metric === "PER_1000" ? "Rate per 1,000 residents" : "Amenity count";
+function updateLegend(metric, breaks, category) {
+  const categoryLabel = getCategoryLabel(category);
+  ui.legendTitle.textContent = metric === "PER_1000" ? `${categoryLabel} per 1,000 residents` : `${categoryLabel} count`;
   ui.legendBins.innerHTML = "";
 
   breaks.forEach((max, i) => {
@@ -346,7 +455,7 @@ function updateLayer(geoData, valuesByJoinKey, options) {
     .map((feature) => valuesByJoinKey.get(feature.__joinKey)?.value)
     .filter((v) => Number.isFinite(v));
   const breaks = computeQuantileBreaks(numericValues, 5);
-  updateLegend(options.metric, breaks);
+  updateLegend(options.metric, breaks, options.category);
 
   if (state.activeLayer) {
     map.removeLayer(state.activeLayer);
@@ -371,7 +480,7 @@ function updateLayer(geoData, valuesByJoinKey, options) {
       const payload = valuesByJoinKey.get(feature.__joinKey);
       const lines = [
         `<strong>${feature.__displayName}</strong>`,
-        `${CATEGORIES[options.category]}`,
+        `${getCategoryLabel(options.category)}`,
         `Count: ${formatMetric(payload?.count ?? null, "COUNT")}`,
       ];
       if (options.metric === "PER_1000") {
@@ -460,12 +569,11 @@ async function render() {
 }
 
 async function bootstrap() {
-  Object.entries(CATEGORIES).forEach(([value, label]) => {
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = label;
-    ui.categorySelect.appendChild(option);
-  });
+  setCategoryOptions(state.availableCategories);
+  if (!state.availableCategories.includes(state.selection.category)) {
+    state.selection.category = state.availableCategories[0] || "";
+  }
+  ui.categorySelect.value = state.selection.category;
 
   AGE_GROUPS.forEach((age) => {
     const option = document.createElement("option");
@@ -484,6 +592,16 @@ async function bootstrap() {
 
   try {
     const amenitiesIndex = await loadAmenitiesIndex();
+    const categories = getCategoriesFromIndex(amenitiesIndex);
+    if (categories.length > 0) {
+      state.availableCategories = categories;
+      setCategoryOptions(state.availableCategories);
+      if (!state.availableCategories.includes(state.selection.category)) {
+        state.selection.category = state.availableCategories[0];
+      }
+      ui.categorySelect.value = state.selection.category;
+    }
+
     const snapshots = getSnapshotsFromIndex(amenitiesIndex);
     ui.snapshotSelect.innerHTML = "";
     snapshots.forEach((snapshot) => {
@@ -495,9 +613,10 @@ async function bootstrap() {
     state.selection.snapshot = snapshots[snapshots.length - 1] || "";
     ui.snapshotSelect.value = state.selection.snapshot;
   } catch (error) {
-    setError(`Failed to load amenities index: ${error.message}`);
+    setError(`Failed to load amenities index: ${error.message}. Using fallback category list.`);
   }
 
+  updateCategoryInfoTooltip();
   await render();
 }
 
@@ -508,11 +627,24 @@ function syncSelectionAndRender() {
   state.selection.metric = ui.metricSelect.value;
   state.selection.ageGroup = ui.ageGroupSelect.value;
   ui.ageGroupSelect.disabled = state.selection.metric !== "PER_1000";
+  updateCategoryInfoTooltip();
   render();
 }
 
 [ui.geoSelect, ui.categorySelect, ui.snapshotSelect, ui.metricSelect, ui.ageGroupSelect].forEach((element) => {
   element.addEventListener("change", syncSelectionAndRender);
+});
+
+ui.categoryInfoButton.addEventListener("mouseenter", () => toggleCategoryInfoTooltip(true));
+ui.categoryInfoButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  toggleCategoryInfoTooltip();
+});
+
+document.addEventListener("click", (event) => {
+  if (ui.categoryInfoTooltip.hidden) return;
+  if (ui.categoryInfoTooltip.contains(event.target) || ui.categoryInfoButton.contains(event.target)) return;
+  closeCategoryInfoTooltip();
 });
 
 bootstrap();
