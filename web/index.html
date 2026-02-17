@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SG Amenities Dashboard — Milestone 2</title>
+    <title>SG Amenities Dashboard — Milestone 4</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -14,48 +14,58 @@
   </head>
   <body>
     <header>
-      <h1>SG Amenities Dashboard — Milestone 2</h1>
+      <h1>SG Amenities Dashboard — Milestone 4</h1>
     </header>
+
     <main>
-      <div id="map"></div>
       <aside id="panel">
         <section class="panel-section">
-          <h2>Geography Layer</h2>
-          <label for="geoLayer">Choose boundary</label>
-          <select id="geoLayer">
+          <h2>Controls</h2>
+
+          <label for="geoSelect">Geography</label>
+          <select id="geoSelect">
             <option value="pa">Planning Area</option>
             <option value="sz">Subzone</option>
           </select>
-          <div id="geoMeta" class="status info"></div>
-        </section>
 
-        <section class="panel-section">
-          <h2>Denominator Debug Panel</h2>
-          <div id="configWarning" class="status warn" hidden></div>
-          <div id="denomStatus" class="status info">Idle</div>
+          <label for="categorySelect">Category</label>
+          <select id="categorySelect"></select>
 
-          <button id="loadDenomIndexBtn">Load Denominator Index</button>
-          <pre id="denomIndexOutput">No index loaded yet.</pre>
+          <label for="snapshotSelect">Snapshot</label>
+          <select id="snapshotSelect"></select>
 
-          <label for="denomGeo">denom_geo</label>
-          <select id="denomGeo">
-            <option value="pa">pa</option>
-            <option value="sz">sz</option>
+          <label for="metricSelect">Metric</label>
+          <select id="metricSelect">
+            <option value="COUNT">COUNT</option>
+            <option value="PER_1000">PER_1000</option>
           </select>
 
-          <label for="denomYear">denom_year</label>
-          <select id="denomYear"></select>
-
-          <button id="fetchDenomSampleBtn">Fetch Denominator Sample</button>
-          <pre id="denomSampleOutput">No sample fetched yet.</pre>
+          <label for="ageGroupSelect">Age Group</label>
+          <select id="ageGroupSelect"></select>
         </section>
 
         <section class="panel-section">
-          <h2>Selected Feature Properties</h2>
-          <small>Click a polygon to inspect all raw properties.</small>
-          <pre id="featureProps">Click a map polygon to view raw JSON.</pre>
+          <h2>Status</h2>
+          <div id="configWarning" class="status warn" hidden></div>
+          <div id="statusLine" class="status info">Initializing...</div>
+          <div id="contextLine" class="status info">No data loaded yet.</div>
+          <div id="errorLine" class="status error" hidden></div>
+        </section>
+
+        <section class="panel-section">
+          <h2>Legend</h2>
+          <div id="legendTitle" class="legend-title">No data</div>
+          <div id="legendBins"></div>
+        </section>
+
+        <section class="panel-section">
+          <h2>Join Health</h2>
+          <div id="joinHealthSummary" class="status info">No joins yet.</div>
+          <pre id="joinHealthList">[]</pre>
         </section>
       </aside>
+
+      <div id="map"></div>
     </main>
 
     <script
