@@ -5,7 +5,7 @@
  */
 
 const CONFIG = {
-  OUTPUT_FOLDER_ID: 'REPLACE_WITH_DRIVE_FOLDER_ID',
+  OUTPUT_FOLDER_ID: '1a-Uzpe68ygqhhrEH8QDnTtda3gXXgx1L',
   RESIDENT_SOURCE: {
     mode: 'drive_csv',
     csvFileId: 'REPLACE_WITH_RESIDENT_CSV_FILE_ID',
