@@ -156,7 +156,7 @@ async function loadDenominatorIndex() {
 
   try {
     setStatus(ui.denomStatus, "Loading denominator index...", "info");
-    const url = buildApiUrl("?route=index");
+    const url = buildApiUrl("?path=denoms/index");
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Index fetch failed (${response.status})`);
@@ -200,7 +200,7 @@ async function fetchDenominatorSample() {
 
   try {
     setStatus(ui.denomStatus, "Loading denominator sample...", "info");
-    const url = buildApiUrl("?route=denoms", { geo, year });
+    const url = buildApiUrl("?path=denoms", { geo, year });
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Denominator sample fetch failed (${response.status})`);
