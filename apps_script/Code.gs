@@ -7,9 +7,9 @@
 const CONFIG = {
   OUTPUT_FOLDER_ID: '1a-Uzpe68ygqhhrEH8QDnTtda3gXXgx1L',
   // Milestone 3 placeholders: paste deployed public GeoJSON URLs here.
-  SUBZONE_GEOJSON_URL: 'REPLACE_WITH_PUBLIC_SUBZONE_GEOJSON_URL',
+  SUBZONE_GEOJSON_URL: 'https://yt-codex.github.io/amenities-dashboard/web/assets/subzone.geojson',
   // Fallback only if subzone features do not include planning area names.
-  PLANNING_AREA_GEOJSON_URL: 'REPLACE_WITH_PUBLIC_PLANNING_AREA_GEOJSON_URL',
+  PLANNING_AREA_GEOJSON_URL: 'https://yt-codex.github.io/amenities-dashboard/web/assets/planning_area.geojson',
   OVERPASS_ENDPOINT: 'https://overpass-api.de/api/interpreter',
   QUARTERLY_CHECK_MONTHS: [1, 4, 7, 10],
   AMENITY_INDEX_FILE: 'amenities_index.json',
