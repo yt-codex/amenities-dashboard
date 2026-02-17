@@ -122,3 +122,48 @@ pre {
     border-bottom: 1px solid #d9e1e8;
   }
 }
+
+.field-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field-header label {
+  margin-bottom: 6px;
+  flex: 1;
+}
+
+.info-button {
+  border: 1px solid #8da0b3;
+  background: #fff;
+  color: #304659;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+.category-tooltip {
+  position: absolute;
+  top: 26px;
+  right: 0;
+  width: min(300px, 85vw);
+  background: #ffffff;
+  border: 1px solid #c8d3dd;
+  border-radius: 6px;
+  box-shadow: 0 8px 18px rgba(15, 34, 51, 0.16);
+  padding: 8px;
+  z-index: 999;
+  font-size: 0.78rem;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}

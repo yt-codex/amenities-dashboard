@@ -28,7 +28,24 @@
             <option value="sz">Subzone</option>
           </select>
 
-          <label for="categorySelect">Category</label>
+          <div class="field-header">
+            <label for="categorySelect">Category</label>
+            <button
+              id="categoryInfoButton"
+              type="button"
+              class="info-button"
+              aria-label="Show category definition"
+              aria-expanded="false"
+              aria-controls="categoryInfoTooltip"
+            >
+              ?
+            </button>
+            <div id="categoryInfoTooltip" class="category-tooltip" role="tooltip" hidden>
+              <div id="categoryInfoTitle" class="tooltip-title">Category</div>
+              <div id="categoryInfoSource">Source: —</div>
+              <div id="categoryInfoIncludes">No definition available.</div>
+            </div>
+          </div>
           <select id="categorySelect"></select>
 
           <label for="snapshotSelect">Snapshot</label>
