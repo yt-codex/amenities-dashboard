@@ -3,12 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SG Amenities Dashboard — WIP</title>
+    <title>SG Amenities Dashboard — Milestone 2</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <header>
+      <h1>SG Amenities Dashboard — Milestone 2</h1>
+    </header>
     <main>
-      <h1>SG Amenities Dashboard — WIP</h1>
-      <p>Milestone 0 placeholder page.</p>
+      <div id="map"></div>
+      <aside id="panel">
+        <section class="panel-section">
+          <h2>Geography Layer</h2>
+          <label for="geoLayer">Choose boundary</label>
+          <select id="geoLayer">
+            <option value="pa">Planning Area</option>
+            <option value="sz">Subzone</option>
+          </select>
+          <div id="geoMeta" class="status info"></div>
+        </section>
+
+        <section class="panel-section">
+          <h2>Denominator Debug Panel</h2>
+          <div id="configWarning" class="status warn" hidden></div>
+          <div id="denomStatus" class="status info">Idle</div>
+
+          <button id="loadDenomIndexBtn">Load Denominator Index</button>
+          <pre id="denomIndexOutput">No index loaded yet.</pre>
+
+          <label for="denomGeo">denom_geo</label>
+          <select id="denomGeo">
+            <option value="pa">pa</option>
+            <option value="sz">sz</option>
+          </select>
+
+          <label for="denomYear">denom_year</label>
+          <select id="denomYear"></select>
+
+          <button id="fetchDenomSampleBtn">Fetch Denominator Sample</button>
+          <pre id="denomSampleOutput">No sample fetched yet.</pre>
+        </section>
+
+        <section class="panel-section">
+          <h2>Selected Feature Properties</h2>
+          <small>Click a polygon to inspect all raw properties.</small>
+          <pre id="featureProps">Click a map polygon to view raw JSON.</pre>
+        </section>
+      </aside>
     </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

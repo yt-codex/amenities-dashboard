@@ -1,0 +1,44 @@
+{
+  "type": "FeatureCollection",
+  "name": "planning_area_placeholder",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "PLN_AREA_N": "BISHAN",
+        "PLN_AREA_C": "BS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.836, 1.352],
+            [103.854, 1.352],
+            [103.854, 1.367],
+            [103.836, 1.367],
+            [103.836, 1.352]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PLN_AREA_N": "TOA PAYOH",
+        "PLN_AREA_C": "TP"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.849, 1.326],
+            [103.868, 1.326],
+            [103.868, 1.342],
+            [103.849, 1.342],
+            [103.849, 1.326]
+          ]
+        ]
+      }
+    }
+  ]
+}

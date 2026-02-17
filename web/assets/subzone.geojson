@@ -1,0 +1,46 @@
+{
+  "type": "FeatureCollection",
+  "name": "subzone_placeholder",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "SUBZONE_N": "BISHAN EAST",
+        "SUBZONE_C": "BSE",
+        "PLN_AREA_N": "BISHAN"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.842, 1.352],
+            [103.852, 1.352],
+            [103.852, 1.36],
+            [103.842, 1.36],
+            [103.842, 1.352]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SUBZONE_N": "TOA PAYOH WEST",
+        "SUBZONE_C": "TPW",
+        "PLN_AREA_N": "TOA PAYOH"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.853, 1.33],
+            [103.863, 1.33],
+            [103.863, 1.338],
+            [103.853, 1.338],
+            [103.853, 1.33]
+          ]
+        ]
+      }
+    }
+  ]
+}
