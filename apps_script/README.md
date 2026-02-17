@@ -1,4 +1,4 @@
-# Apps Script — Milestone 1 (Resident Denominators Service)
+# Apps Script — Milestones 1 & 3 (Denominators + Amenity Snapshots)
 
 This folder contains Google Apps Script code to build resident denominator JSON artifacts at:
 - **Subzone level** (`SZ × age_group`)
@@ -126,3 +126,78 @@ This implementation always returns JSON and includes `status` in the JSON payloa
 - `{ "status": 404, "error": "..." }`
 - `{ "status": 500, "error": "..." }`
 
+
+
+---
+
+## Milestone 3 — Automated amenity snapshots (Overpass → SZ/PA)
+
+Milestone 3 adds an amenity pipeline in `Code.gs` to:
+- pull amenity points from OpenStreetMap (Overpass),
+- assign points to **subzones** via point-in-polygon,
+- aggregate counts to **subzone** and **planning area**,
+- store quarterly snapshot JSON files in Drive,
+- expose JSON web endpoints for static-site consumption.
+
+### Additional config placeholders (required)
+
+In `CONFIG` in `Code.gs`, set:
+- `CONFIG.SUBZONE_GEOJSON_URL` (public URL for deployed `subzone.geojson`)
+- `CONFIG.PLANNING_AREA_GEOJSON_URL` (public URL for deployed `planning_area.geojson`, fallback only)
+- `CONFIG.OVERPASS_ENDPOINT` (default provided)
+- `CONFIG.QUARTERLY_CHECK_MONTHS` (default `[1,4,7,10]`)
+
+Do not use private Drive links unless they are publicly fetchable by Apps Script.
+
+### Amenity categories (exact)
+
+- `gp_clinics`
+- `dental`
+- `childcare_preschool`
+- `secondary_schools`
+- `supermarkets`
+- `eldercare`
+
+### Snapshot outputs in Drive
+
+For each quarter `YYYYQn`:
+- `amenities_sz_YYYYQn.json`
+- `amenities_pa_YYYYQn.json`
+- `amenities_debug_YYYYQn.json` (small debug payload)
+
+And index:
+- `amenities_index.json`
+
+### Endpoints (GET)
+
+- `?path=amenities/index`
+- `?path=amenities&geo=sz&snapshot=YYYYQn`
+- `?path=amenities&geo=pa&snapshot=YYYYQn`
+
+### Scheduling and manual runs
+
+Run once to install monthly trigger (day 1, 6am):
+- `ensureQuarterlyAmenityTrigger_()`
+
+Monthly handler (guarded to quarter months):
+- `scheduledAmenityCheck()`
+
+Manual helpers:
+- `runAmenityNow()`
+- `rebuildAmenitySnapshot("YYYYQn")`
+
+### Milestone test helper
+
+Run:
+- `runAmenityTests("YYYYQn")`
+
+This checks:
+1. Overpass returns arrays and logs counts by category.
+2. Assignment coverage ratios (warn if `< 0.80`).
+3. Supermarkets sanity bound (`<= 5000` points, hard-fail above).
+4. Compact output keys for SZ payload rows.
+5. Idempotency for index snapshot entries.
+
+### Limitation note
+
+`secondary_schools` relies on level tags (`school:level`, `isced:level`, or `grades`) and may undercount where OSM data is incomplete.
