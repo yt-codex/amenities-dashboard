@@ -27,6 +27,7 @@ const AMENITY_CATEGORIES = [
   'gp_clinics',
   'dental',
   'childcare_preschool',
+  'primary_schools',
   'secondary_schools',
   'supermarkets',
   'eldercare'
@@ -264,6 +265,17 @@ function overpassCategoryFilters_() {
       'node(area.sg)["childcare"="yes"];',
       'way(area.sg)["childcare"="yes"];',
       'relation(area.sg)["childcare"="yes"];'
+    ].join('\n'),
+    primary_schools: [
+      'node(area.sg)["amenity"="school"]["school:level"~"primary",i];',
+      'way(area.sg)["amenity"="school"]["school:level"~"primary",i];',
+      'relation(area.sg)["amenity"="school"]["school:level"~"primary",i];',
+      'node(area.sg)["amenity"="school"]["isced:level"~"(^|;|,)(1)($|;|,)"];',
+      'way(area.sg)["amenity"="school"]["isced:level"~"(^|;|,)(1)($|;|,)"];',
+      'relation(area.sg)["amenity"="school"]["isced:level"~"(^|;|,)(1)($|;|,)"];',
+      'node(area.sg)["amenity"="school"]["grades"~"(1|2|3|4|5|6)"];',
+      'way(area.sg)["amenity"="school"]["grades"~"(1|2|3|4|5|6)"];',
+      'relation(area.sg)["amenity"="school"]["grades"~"(1|2|3|4|5|6)"];'
     ].join('\n'),
     secondary_schools: [
       'node(area.sg)["amenity"="school"]["school:level"~"secondary",i];',

@@ -58,6 +58,43 @@ const CATEGORY_INFO = {
   },
 };
 
+
+const CATEGORY_ALIASES = {
+  gp_clinics: "gp_clinics",
+  "gp clinics": "gp_clinics",
+  gpclinic: "gp_clinics",
+  dental: "dental",
+  childcare_preschool: "childcare_preschool",
+  "childcare / preschool": "childcare_preschool",
+  "childcare & preschool": "childcare_preschool",
+  childcare: "childcare_preschool",
+  preschool: "childcare_preschool",
+  primary_schools: "primary_schools",
+  "primary schools": "primary_schools",
+  primary_school: "primary_schools",
+  secondary_schools: "secondary_schools",
+  "secondary schools": "secondary_schools",
+  secondary_school: "secondary_schools",
+  supermarkets: "supermarkets",
+  supermarket: "supermarkets",
+  eldercare: "eldercare",
+  "eldercare facilities": "eldercare",
+};
+
+function toCategoryKey(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const rawLower = raw.toLowerCase();
+  if (CATEGORY_ALIASES[rawLower]) return CATEGORY_ALIASES[rawLower];
+
+  const normalized = rawLower
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .replace(/_+/g, "_");
+
+  return CATEGORY_ALIASES[normalized] || normalized;
+}
 const DEFAULT_CATEGORY_INFO = {
   title: "Category",
   source: "Source: —",
@@ -180,17 +217,19 @@ function asRows(payload) {
 
 
 function getCategoryLabel(key) {
-  return CATEGORY_LABELS[key] || key;
+  const normalizedKey = toCategoryKey(key);
+  return CATEGORY_LABELS[normalizedKey] || key;
 }
 
 function getCategoryInfo(key) {
-  return CATEGORY_INFO[key] || DEFAULT_CATEGORY_INFO;
+  const normalizedKey = toCategoryKey(key);
+  return CATEGORY_INFO[normalizedKey] || DEFAULT_CATEGORY_INFO;
 }
 
 function getCategoriesFromIndex(indexPayload) {
   const data = indexPayload?.data ?? indexPayload;
   const categories = data?.categories || data?.amenities || data?.keys || [];
-  const normalized = [...new Set(categories.map((item) => String(item || "").trim()).filter(Boolean))];
+  const normalized = [...new Set(categories.map((item) => toCategoryKey(item)).filter(Boolean))];
   const sortedKnown = FALLBACK_CATEGORY_ORDER.filter((key) => normalized.includes(key));
   const remaining = normalized.filter((key) => !sortedKnown.includes(key)).sort();
   return [...sortedKnown, ...remaining];
@@ -356,11 +395,12 @@ function buildAmenityLookup(rows, geo, category) {
     const joinKey = geo === "sz" ? row.__joinKeySz : row.__joinKeyPa;
     if (!joinKey) return;
 
-    const rowCategory = String(row.category || row.amenity || row.key || "").toLowerCase();
+    const rowCategory = toCategoryKey(row.category || row.amenity || row.key || "");
+    const targetCategory = toCategoryKey(category);
     let count = null;
 
     if (rowCategory) {
-      if (rowCategory !== category) return;
+      if (rowCategory !== targetCategory) return;
       count = Number(row.count ?? row.value ?? row.total);
     } else if (row[category] !== undefined) {
       count = Number(row[category]);
@@ -622,7 +662,7 @@ async function bootstrap() {
 
 function syncSelectionAndRender() {
   state.selection.geo = ui.geoSelect.value;
-  state.selection.category = ui.categorySelect.value;
+  state.selection.category = toCategoryKey(ui.categorySelect.value);
   state.selection.snapshot = ui.snapshotSelect.value;
   state.selection.metric = ui.metricSelect.value;
   state.selection.ageGroup = ui.ageGroupSelect.value;
