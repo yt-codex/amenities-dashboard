@@ -162,7 +162,11 @@ async function loadDenominatorIndex() {
       throw new Error(`Index fetch failed (${response.status})`);
     }
 
-    const index = await response.json();
+    const body = await response.json();
+    if (body?.error || body?.status >= 400) {
+      throw new Error(body.error || `Index fetch failed (${body.status})`);
+    }
+    const index = body.data ?? body;
     state.denomIndex = index;
 
     const summary = {
@@ -206,7 +210,11 @@ async function fetchDenominatorSample() {
       throw new Error(`Denominator sample fetch failed (${response.status})`);
     }
 
-    const payload = await response.json();
+    const body = await response.json();
+    if (body?.error || body?.status >= 400) {
+      throw new Error(body.error || `Denominator sample fetch failed (${body.status})`);
+    }
+    const payload = body.data ?? body;
     const rows = Array.isArray(payload.rows) ? payload.rows : payload;
     const output = {
       rows_count: rows.length,
