@@ -1,33 +1,31 @@
-# SG Amenities Dashboard (Milestone 2)
+# Singapore Amenities Explorer
 
-This project builds a shareable static web dashboard (hosted on GitHub Pages) that maps Singapore planning areas and subzones.
-Data processing runs in Google Apps Script and publishes JSON endpoints consumed by the frontend.
-A quarterly Apps Script trigger (time-based) will refresh snapshots; GitHub Actions scheduling is explicitly out of scope.
+Singapore Amenities Explorer is a static web mapping application that lets users compare amenities coverage across Singapore planning areas and subzones.
+The frontend is designed for GitHub Pages hosting, while Google Apps Script serves JSON data endpoints for amenity counts and denominator baselines.
 
-## Architecture (current)
+## What the app does
+
+- Renders Singapore boundaries (planning area or subzone) on an interactive Leaflet map.
+- Lets users switch amenity categories, snapshot vintages, and metrics (`COUNT` or `PER_1000`).
+- Supports age-group-aware denominator calculations for normalized rates.
+- Shows contextual status information, legend bins, and join-health diagnostics to make data quality visible.
+- Includes category definition tooltips so users can quickly understand what each amenity bucket contains.
+
+## Data sources and responsibility notice
+
+This dashboard compiles data from publicly available sources and APIs.
+While care is taken in assembling and presenting the information, the author does not guarantee and is not liable for the accuracy, completeness, or integrity of the underlying data.
+
+## Project structure
 
 ```text
-[Google Apps Script JSON endpoints] ---> [GitHub Pages static frontend (/web)] ---> [Leaflet map + debug panels]
+apps_script/   Google Apps Script project for endpoint generation/serving
+web/           Static frontend (Leaflet map UI + controls)
 ```
 
-## Milestone 2 scope delivered
+## Configure the app
 
-- Leaflet map scaffold with geography toggle (Planning Area vs Subzone).
-- Local GeoJSON loading from `/web/assets/planning_area.geojson` and `/web/assets/subzone.geojson`.
-- Hover tooltip name display and click-to-inspect raw feature properties.
-- Denominator debug panel with:
-  - index fetch (`route=index`)
-  - sample fetch (`route=denoms&geo=<pa|sz>&year=<vintage>`)
-  - basic request/error status rendering
-  - in-memory index caching to avoid repeated requests
-
-No choropleth shading, amenities extraction, quarterly snapshots, or denominator mapping is included in this milestone.
-
-## Milestone 2 Runbook
-
-### 1) Configure Apps Script endpoint
-
-Edit `web/config.js` and set:
+Edit `web/config.js` and set your deployed Apps Script web app URL:
 
 ```js
 export const CONFIG = {
@@ -35,18 +33,11 @@ export const CONFIG = {
 };
 ```
 
-`app.js` builds API URLs from this base and calls:
+The frontend calls this base URL with query parameters to retrieve index and data payloads.
 
-- `?route=index`
-- `?route=denoms&geo=pa|sz&year=<vintage>`
+## Run locally
 
-If `APPS_SCRIPT_URL` is missing/invalid, the UI shows a visible warning and blocks denominator fetch actions.
-
-### 2) Run locally (important)
-
-Do **not** open `web/index.html` via `file://` because browser fetches for local GeoJSON can fail due to CORS/security rules.
-
-From repo root:
+Serve the repository through a local HTTP server (do not open `web/index.html` with `file://`):
 
 ```bash
 python3 -m http.server 8000
@@ -56,50 +47,15 @@ Then open:
 
 - `http://localhost:8000/web/`
 
-### 3) Deploy to GitHub Pages
+## Deploy to GitHub Pages
 
 1. Push this repository to GitHub.
-2. In **Settings → Pages**, choose source branch (for example `main`) and folder (`/root` if serving repo root).
-3. Ensure `/web` files are committed.
-4. Visit `https://<org-or-user>.github.io/<repo>/web/`.
+2. In **Settings → Pages**, select your deployment branch/folder.
+3. Ensure the `web/` directory is included in the published path.
+4. Open `https://<org-or-user>.github.io/<repo>/web/`.
 
-### 4) Checkpoints A–C
+## Notes
 
-#### Checkpoint A — geometry + layer controls
-
-- Open `/web/`.
-- Confirm map tiles load.
-- Switch geography selector between **Planning Area** and **Subzone**.
-- Confirm polygons swap.
-- Hover polygon and verify tooltip shows name.
-  - Planning area tooltip uses `PLN_AREA_N` (fallback candidates are implemented in code).
-  - Subzone tooltip uses `SUBZONE_N` (fallback candidates are implemented in code).
-- Click polygon and verify side panel shows raw feature JSON.
-
-#### Checkpoint B — denominator index
-
-- Click **Load Denominator Index**.
-- Confirm output shows:
-  - `vintages`
-  - `age_groups`
-  - `geos`
-  - `updated_at`
-- Confirm `denom_year` dropdown is populated from `vintages`.
-
-#### Checkpoint C — denominator sample
-
-- Choose `denom_geo` (`pa` or `sz`) and `denom_year`.
-- Click **Fetch Denominator Sample**.
-- Confirm output shows:
-  - `rows_count`
-  - `first_5_rows`
-
-## Notes on boundary files
-
-The files in `web/assets` are placeholders for Milestone 2 wiring validation.
-Replace with simplified authoritative GeoJSON exports from:
-
-- Planning Area Boundary (No Sea) — URA Master Plan 2019 via data.gov.sg
-- Subzone Boundary — SVY21 via data.gov.sg
-
-Keep files simplified to preserve frontend performance on GitHub Pages.
+- Boundary files are located in `web/assets/`.
+- Keep GeoJSON files simplified for smooth rendering on static hosting.
+- If the Apps Script endpoint is missing or invalid, the UI will show a configuration warning and block data fetches.
