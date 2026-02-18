@@ -145,8 +145,8 @@ const ui = {
   errorLine: document.getElementById("errorLine"),
   legendTitle: document.getElementById("legendTitle"),
   legendBins: document.getElementById("legendBins"),
-  joinHealthSummary: document.getElementById("joinHealthSummary"),
-  joinHealthList: document.getElementById("joinHealthList"),
+  topAreasSummary: document.getElementById("topAreasSummary"),
+  topAreasList: document.getElementById("topAreasList"),
 };
 
 const map = L.map("map").setView([1.3521, 103.8198], 11);
@@ -442,12 +442,14 @@ function buildDenomLookup(rows, geo, ageGroup) {
 function computeQuantileBreaks(values, bins = 5) {
   if (values.length === 0) return [];
   const sorted = [...values].sort((a, b) => a - b);
-  const breaks = [];
+  const rawBreaks = [];
   for (let i = 1; i <= bins; i += 1) {
     const idx = Math.min(sorted.length - 1, Math.floor((i * sorted.length) / bins) - 1);
-    breaks.push(sorted[Math.max(0, idx)]);
+    rawBreaks.push(sorted[Math.max(0, idx)]);
   }
-  return breaks;
+
+  // Remove duplicate breakpoints so legend bins do not repeat (e.g. 1.00 - 1.00).
+  return rawBreaks.filter((value, index) => index === 0 || value > rawBreaks[index - 1]);
 }
 
 function getColor(value, breaks) {
@@ -482,12 +484,52 @@ function updateLegend(metric, breaks, category) {
   ui.legendBins.appendChild(missing);
 }
 
-function updateJoinHealth(features, matchedKeys, unmatchedItems) {
-  const total = features.length;
-  const matched = matchedKeys.size;
-  const unmatched = total - matched;
-  ui.joinHealthSummary.textContent = `Total polygons: ${total}, Matched: ${matched}, Unmatched: ${unmatched}`;
-  ui.joinHealthList.textContent = JSON.stringify(unmatchedItems.slice(0, 10), null, 2);
+function updateTopAreas(features, valuesByJoinKey, options) {
+  const rows = features
+    .map((feature) => {
+      const payload = valuesByJoinKey.get(feature.__joinKey);
+      return {
+        area: feature.__displayName,
+        value: payload?.value,
+        count: payload?.count,
+      };
+    })
+    .filter((row) => Number.isFinite(row.value));
+
+  rows.sort((a, b) => b.value - a.value || a.area.localeCompare(b.area));
+
+  const ranked = [];
+  let currentRank = 0;
+  let previousValue = null;
+
+  rows.forEach((row, index) => {
+    if (previousValue === null || row.value !== previousValue) {
+      currentRank = index + 1;
+      previousValue = row.value;
+    }
+    ranked.push({ ...row, rank: currentRank });
+  });
+
+  const topRows = ranked.filter((row) => row.rank <= 5);
+
+  const geoLabel = GEO_CONFIG[options.geo]?.label || "Area";
+  if (topRows.length === 0) {
+    ui.topAreasSummary.textContent = `No ${geoLabel.toLowerCase()} values available for ranking.`;
+    ui.topAreasList.innerHTML = "";
+    return;
+  }
+
+  const valueLabel = options.metric === "PER_1000" ? "per 1,000" : "count";
+  ui.topAreasSummary.textContent = `Top ${Math.min(5, ranked.length)} ${geoLabel.toLowerCase()} by ${getCategoryLabel(options.category)} ${valueLabel} (including ties).`;
+
+  ui.topAreasList.innerHTML = "";
+  topRows.forEach((row) => {
+    const item = document.createElement("li");
+    const primary = options.metric === "PER_1000" ? formatMetric(row.value, "PER_1000") : formatMetric(row.value, "COUNT");
+    const secondary = options.metric === "PER_1000" ? ` (count: ${formatMetric(row.count, "COUNT")})` : "";
+    item.textContent = `#${row.rank} ${row.area}: ${primary}${secondary}`;
+    ui.topAreasList.appendChild(item);
+  });
 }
 
 function updateLayer(geoData, valuesByJoinKey, options) {
@@ -501,14 +543,9 @@ function updateLayer(geoData, valuesByJoinKey, options) {
     map.removeLayer(state.activeLayer);
   }
 
-  const matchedKeys = new Set();
-  const unmatchedItems = [];
-
   state.activeLayer = L.geoJSON(geoData, {
     style: (feature) => {
       const payload = valuesByJoinKey.get(feature.__joinKey);
-      if (payload) matchedKeys.add(feature.__joinKey);
-      else unmatchedItems.push({ raw: feature.__displayName, normalized: feature.__joinKey });
       return {
         color: "#2e4053",
         weight: 0.8,
@@ -538,7 +575,7 @@ function updateLayer(geoData, valuesByJoinKey, options) {
 
   const bounds = state.activeLayer.getBounds();
   if (bounds.isValid()) map.fitBounds(bounds, { padding: [20, 20] });
-  updateJoinHealth(geoData.features, matchedKeys, unmatchedItems);
+  updateTopAreas(geoData.features, valuesByJoinKey, options);
 }
 
 async function render() {
@@ -594,6 +631,7 @@ async function render() {
 
     updateLayer(geoData, valuesByJoinKey, {
       metric,
+      geo,
       category,
       snapshot,
       ageGroup,
