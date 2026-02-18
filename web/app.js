@@ -633,6 +633,11 @@ async function render() {
         valuesByJoinKey.set(key, { count, denom: Number.isFinite(denom) ? denom : null, value });
       });
 
+      denomLookup.forEach((denom, key) => {
+        if (valuesByJoinKey.has(key)) return;
+        valuesByJoinKey.set(key, { count: null, denom, value: null });
+      });
+
       ui.contextLine.textContent = `Loaded snapshot ${snapshot}. Denominator vintage: ${chosen.year ?? "N/A"}. ${chosen.warning}`.trim();
     }
 
