@@ -128,6 +128,10 @@ const GEO_CONFIG = {
 const COLORS = ["#e8f1fb", "#bdd7ef", "#82b8df", "#3f8fc9", "#0f5c99"];
 const MISSING_COLOR = "#d5d8dc";
 
+function getElementByIdWithFallback(primaryId, ...fallbackIds) {
+  return [primaryId, ...fallbackIds].map((id) => document.getElementById(id)).find(Boolean) || null;
+}
+
 const ui = {
   geoSelect: document.getElementById("geoSelect"),
   categorySelect: document.getElementById("categorySelect"),
@@ -145,8 +149,9 @@ const ui = {
   errorLine: document.getElementById("errorLine"),
   legendTitle: document.getElementById("legendTitle"),
   legendBins: document.getElementById("legendBins"),
-  topAreasSummary: document.getElementById("topAreasSummary"),
-  topAreasList: document.getElementById("topAreasList"),
+  // Legacy fallback IDs keep the rankings widget working across slightly different panel markup revisions.
+  topAreasSummary: getElementByIdWithFallback("topAreasSummary", "topRankingsSummary"),
+  topAreasList: getElementByIdWithFallback("topAreasList", "topRankingsList"),
 };
 
 const map = L.map("map").setView([1.3521, 103.8198], 11);
@@ -485,6 +490,8 @@ function updateLegend(metric, breaks, category) {
 }
 
 function updateTopAreas(features, valuesByJoinKey, options) {
+  if (!ui.topAreasSummary || !ui.topAreasList) return;
+
   const rows = features
     .map((feature) => {
       const payload = valuesByJoinKey.get(feature.__joinKey);
