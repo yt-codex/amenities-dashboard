@@ -8,10 +8,9 @@ const CONFIG = {
   OUTPUT_FOLDER_ID: '1a-Uzpe68ygqhhrEH8QDnTtda3gXXgx1L',
   // Milestone 3 placeholders: paste deployed public GeoJSON URLs here.
   SUBZONE_GEOJSON_URL: 'https://yt-codex.github.io/amenities-dashboard/web/assets/subzone.geojson',
-  // Fallback only if subzone features do not include planning area names.
-  PLANNING_AREA_GEOJSON_URL: 'https://yt-codex.github.io/amenities-dashboard/web/assets/planning_area.geojson',
   OVERPASS_ENDPOINT: 'https://overpass-api.de/api/interpreter',
   QUARTERLY_CHECK_MONTHS: [1, 4, 7, 10],
+  ADMIN_TRIGGER_TOKEN_PROPERTY: 'ADMIN_TRIGGER_TOKEN',
   AMENITY_INDEX_FILE: 'amenities_index.json',
   AMENITY_SZ_PREFIX: 'amenities_sz_',
   AMENITY_PA_PREFIX: 'amenities_pa_',
@@ -490,31 +489,134 @@ function ensureQuarterlyAmenityTrigger_() {
     .create();
 }
 
-function scheduledAmenityCheck() {
+function runQuarterlyAmenityCheck_(forceRun) {
   const now = new Date();
   const month = now.getMonth() + 1;
-  if (CONFIG.QUARTERLY_CHECK_MONTHS.indexOf(month) === -1) {
+  const snapshotQuarter = getCurrentSnapshotQuarter_();
+
+  if (!forceRun && CONFIG.QUARTERLY_CHECK_MONTHS.indexOf(month) === -1) {
     Logger.log('scheduledAmenityCheck skipped for month=' + month);
-    return;
+    return {
+      status: 'skipped',
+      reason: 'non_quarter_month',
+      month,
+      snapshot: snapshotQuarter
+    };
   }
 
-  const snapshotQuarter = getCurrentSnapshotQuarter_();
   const folder = DriveApp.getFolderById(CONFIG.OUTPUT_FOLDER_ID);
   const index = readAmenityIndex_(folder);
   if ((index.snapshots || []).indexOf(snapshotQuarter) !== -1) {
     Logger.log('scheduledAmenityCheck skipped, snapshot exists=' + snapshotQuarter);
-    return;
+    return {
+      status: 'skipped',
+      reason: 'snapshot_exists',
+      month,
+      snapshot: snapshotQuarter
+    };
   }
 
-  buildAmenitySnapshot_(snapshotQuarter);
+  const build = buildAmenitySnapshot_(snapshotQuarter);
+  return {
+    status: 'built',
+    reason: 'snapshot_created',
+    month,
+    snapshot: snapshotQuarter,
+    build
+  };
+}
+
+function scheduledAmenityCheck() {
+  return runQuarterlyAmenityCheck_(false);
 }
 
 function runAmenityNow() {
-  return buildAmenitySnapshot_(getCurrentSnapshotQuarter_());
+  return runQuarterlyAmenityCheck_(true);
 }
 
 function rebuildAmenitySnapshot(snapshotQuarter) {
   return buildAmenitySnapshot_(snapshotQuarter);
+}
+
+function getAdminTriggerToken_() {
+  const token = PropertiesService.getScriptProperties().getProperty(CONFIG.ADMIN_TRIGGER_TOKEN_PROPERTY);
+  return isBlank(token) ? '' : String(token).trim();
+}
+
+function verifyAdminToken_(providedToken) {
+  const expectedToken = getAdminTriggerToken_();
+  if (!expectedToken) {
+    return {
+      ok: false,
+      status: 500,
+      message: 'Admin token is not configured. Set script property ' + CONFIG.ADMIN_TRIGGER_TOKEN_PROPERTY + '.'
+    };
+  }
+
+  const receivedToken = String(providedToken || '').trim();
+  if (!receivedToken || receivedToken !== expectedToken) {
+    return {
+      ok: false,
+      status: 403,
+      message: 'Unauthorized admin request.'
+    };
+  }
+
+  return { ok: true };
+}
+
+function parsePostPayload_(e) {
+  const params = (e && e.parameter) || {};
+  let body = {};
+
+  if (e && e.postData && e.postData.contents) {
+    const mime = String(e.postData.type || '').toLowerCase();
+    if (mime.indexOf('application/json') === 0) {
+      try {
+        body = JSON.parse(e.postData.contents);
+      } catch (err) {
+        return {
+          path: '',
+          token: '',
+          force: false,
+          parse_error: 'Invalid JSON body.'
+        };
+      }
+    }
+  }
+
+  return {
+    path: String(params.path || body.path || ''),
+    token: String(params.token || body.token || ''),
+    force: String(params.force || body.force || '').toLowerCase() === 'true',
+    parse_error: ''
+  };
+}
+
+function doPost(e) {
+  try {
+    const payload = parsePostPayload_(e);
+    if (payload.parse_error) {
+      return jsonError(payload.parse_error, 400);
+    }
+
+    if (payload.path === 'admin/amenities/quarterly-refresh') {
+      const auth = verifyAdminToken_(payload.token);
+      if (!auth.ok) return jsonError(auth.message, auth.status);
+      const result = runQuarterlyAmenityCheck_(payload.force);
+      return jsonResponse(result, 200);
+    }
+
+    if (payload.path === 'admin/amenities/run-now') {
+      const auth = verifyAdminToken_(payload.token);
+      if (!auth.ok) return jsonError(auth.message, auth.status);
+      return jsonResponse(runQuarterlyAmenityCheck_(true), 200);
+    }
+
+    return jsonError('Unknown path', 404);
+  } catch (err) {
+    return jsonError(err.message || String(err), 500);
+  }
 }
 
 function runAmenityTests(snapshotQuarter) {

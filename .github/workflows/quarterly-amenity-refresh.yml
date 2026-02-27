@@ -1,0 +1,74 @@
+name: Quarterly Amenity Refresh
+
+on:
+  schedule:
+    - cron: "0 0 1 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Force snapshot creation check even outside quarter months
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+concurrency:
+  group: quarterly-amenity-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Validate required secrets
+        env:
+          APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }}
+          APPS_SCRIPT_ADMIN_TOKEN: ${{ secrets.APPS_SCRIPT_ADMIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          missing=0
+          if [ -z "${APPS_SCRIPT_URL:-}" ]; then
+            echo "::error::Missing repository secret APPS_SCRIPT_URL"
+            missing=1
+          fi
+          if [ -z "${APPS_SCRIPT_ADMIN_TOKEN:-}" ]; then
+            echo "::error::Missing repository secret APPS_SCRIPT_ADMIN_TOKEN"
+            missing=1
+          fi
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Trigger Apps Script quarterly refresh
+        env:
+          APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }}
+          APPS_SCRIPT_ADMIN_TOKEN: ${{ secrets.APPS_SCRIPT_ADMIN_TOKEN }}
+          FORCE_REFRESH: ${{ github.event.inputs.force || 'false' }}
+        run: |
+          set -euo pipefail
+          response="$(curl -sS -X POST "$APPS_SCRIPT_URL" \
+            --data-urlencode "path=admin/amenities/quarterly-refresh" \
+            --data-urlencode "token=$APPS_SCRIPT_ADMIN_TOKEN" \
+            --data-urlencode "force=$FORCE_REFRESH")"
+
+          echo "$response" | python - <<'PY'
+          import json
+          import sys
+
+          raw = sys.stdin.read().strip()
+          if not raw:
+            raise SystemExit("Empty response from Apps Script.")
+
+          payload = json.loads(raw)
+          status = int(payload.get("status", 500))
+          if status >= 400:
+            raise SystemExit(f"Apps Script error status={status}: {payload}")
+
+          data = payload.get("data", {})
+          print(f"refresh_status={data.get('status')}")
+          print(f"reason={data.get('reason')}")
+          print(f"snapshot={data.get('snapshot')}")
+          PY

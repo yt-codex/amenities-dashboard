@@ -97,7 +97,7 @@ function toCategoryKey(value) {
 }
 const DEFAULT_CATEGORY_INFO = {
   title: "Category",
-  source: "Source: —",
+  source: "Source: -",
   includes: "No definition available.",
 };
 
@@ -271,14 +271,11 @@ function toggleCategoryInfoTooltip(forceOpen) {
 
 function normalizeName(value) {
   // Shared join-key normalizer for both polygons and API rows.
-  // Rules: null-safe -> trim -> uppercase -> normalize apostrophes -> remove punctuation ->
-  // collapse non-alphanumeric to single spaces -> collapse spaces -> trim.
+  // Rules: null-safe -> trim -> uppercase -> collapse non-alphanumeric to single spaces -> trim.
   if (value === null || value === undefined) return "";
   return String(value)
     .trim()
     .toUpperCase()
-    .replace(/[‘’`´]/g, "'")
-    .replace(/[\p{P}\p{S}]/gu, " ")
     .replace(/[^A-Z0-9]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -601,6 +598,11 @@ async function render() {
   state.controllers.render = controller;
 
   const { geo, category, snapshot, metric, ageGroup } = state.selection;
+  if (!snapshot) {
+    setStatus("No amenity snapshot available yet.", "warn");
+    setError("No snapshots found in amenities index. Build one in Apps Script, then refresh.");
+    return;
+  }
 
   try {
     setStatus("Loading data...", "info");
@@ -700,13 +702,21 @@ async function bootstrap() {
       option.textContent = snapshot;
       ui.snapshotSelect.appendChild(option);
     });
+    ui.snapshotSelect.disabled = snapshots.length === 0;
     state.selection.snapshot = snapshots[snapshots.length - 1] || "";
     ui.snapshotSelect.value = state.selection.snapshot;
   } catch (error) {
-    setError(`Failed to load amenities index: ${error.message}. Using fallback category list.`);
+    ui.snapshotSelect.innerHTML = "";
+    ui.snapshotSelect.disabled = true;
+    state.selection.snapshot = "";
+    setError(`Failed to load amenities index: ${error.message}.`);
   }
 
   updateCategoryInfoTooltip();
+  if (!state.selection.snapshot) {
+    setStatus("No amenity snapshots are available.", "warn");
+    return;
+  }
   await render();
 }
 
