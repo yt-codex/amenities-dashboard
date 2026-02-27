@@ -1,0 +1,1406 @@
+[
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "childcare_preschool",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "gp_clinics",
+    "count": 22
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "primary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "secondary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ANG MO KIO",
+    "category": "supermarkets",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "childcare_preschool",
+    "count": 23
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "dental",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "eldercare",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "gp_clinics",
+    "count": 41
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "primary_schools",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "secondary_schools",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BEDOK",
+    "category": "supermarkets",
+    "count": 26
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "childcare_preschool",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "dental",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "gp_clinics",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "primary_schools",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BISHAN",
+    "category": "supermarkets",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "childcare_preschool",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "gp_clinics",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "primary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "secondary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT BATOK",
+    "category": "supermarkets",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "childcare_preschool",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "dental",
+    "count": 14
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "gp_clinics",
+    "count": 32
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "primary_schools",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT MERAH",
+    "category": "supermarkets",
+    "count": 22
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "childcare_preschool",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "gp_clinics",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "primary_schools",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "secondary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT PANJANG",
+    "category": "supermarkets",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "childcare_preschool",
+    "count": 29
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "dental",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "gp_clinics",
+    "count": 15
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "primary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "secondary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "BUKIT TIMAH",
+    "category": "supermarkets",
+    "count": 13
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CENTRAL WATER CATCHMENT",
+    "category": "supermarkets",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHANGI",
+    "category": "gp_clinics",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHANGI",
+    "category": "supermarkets",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHANGI BAY",
+    "category": "gp_clinics",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "childcare_preschool",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "gp_clinics",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "primary_schools",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "secondary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CHOA CHU KANG",
+    "category": "supermarkets",
+    "count": 15
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "childcare_preschool",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "dental",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "gp_clinics",
+    "count": 13
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "primary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "secondary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "CLEMENTI",
+    "category": "supermarkets",
+    "count": 16
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "DOWNTOWN CORE",
+    "category": "childcare_preschool",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "DOWNTOWN CORE",
+    "category": "dental",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "DOWNTOWN CORE",
+    "category": "gp_clinics",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "DOWNTOWN CORE",
+    "category": "supermarkets",
+    "count": 16
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "childcare_preschool",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "dental",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "gp_clinics",
+    "count": 31
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "primary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "secondary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "GEYLANG",
+    "category": "supermarkets",
+    "count": 29
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "childcare_preschool",
+    "count": 21
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "dental",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "eldercare",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "gp_clinics",
+    "count": 39
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "primary_schools",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "secondary_schools",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "HOUGANG",
+    "category": "supermarkets",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "childcare_preschool",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "dental",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "gp_clinics",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "primary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "secondary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "category": "supermarkets",
+    "count": 14
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "childcare_preschool",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "eldercare",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "gp_clinics",
+    "count": 70
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "primary_schools",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "secondary_schools",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG WEST",
+    "category": "supermarkets",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "childcare_preschool",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "dental",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "gp_clinics",
+    "count": 15
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "primary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "secondary_schools",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "KALLANG",
+    "category": "supermarkets",
+    "count": 28
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MANDAI",
+    "category": "childcare_preschool",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "childcare_preschool",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "dental",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "gp_clinics",
+    "count": 26
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "primary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MARINE PARADE",
+    "category": "supermarkets",
+    "count": 14
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MUSEUM",
+    "category": "dental",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MUSEUM",
+    "category": "gp_clinics",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "MUSEUM",
+    "category": "supermarkets",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NEWTON",
+    "category": "childcare_preschool",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NEWTON",
+    "category": "gp_clinics",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NEWTON",
+    "category": "primary_schools",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NEWTON",
+    "category": "supermarkets",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "childcare_preschool",
+    "count": 24
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "dental",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "gp_clinics",
+    "count": 21
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "primary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "secondary_schools",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "NOVENA",
+    "category": "supermarkets",
+    "count": 15
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ORCHARD",
+    "category": "childcare_preschool",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ORCHARD",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ORCHARD",
+    "category": "gp_clinics",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ORCHARD",
+    "category": "supermarkets",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "childcare_preschool",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "dental",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "gp_clinics",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "secondary_schools",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "OUTRAM",
+    "category": "supermarkets",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "childcare_preschool",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "dental",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "gp_clinics",
+    "count": 15
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "primary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PASIR RIS",
+    "category": "supermarkets",
+    "count": 14
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PIONEER",
+    "category": "gp_clinics",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PIONEER",
+    "category": "supermarkets",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "childcare_preschool",
+    "count": 20
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "dental",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "gp_clinics",
+    "count": 22
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "primary_schools",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "PUNGGOL",
+    "category": "supermarkets",
+    "count": 28
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "childcare_preschool",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "gp_clinics",
+    "count": 18
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "primary_schools",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "secondary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "QUEENSTOWN",
+    "category": "supermarkets",
+    "count": 22
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "RIVER VALLEY",
+    "category": "childcare_preschool",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "RIVER VALLEY",
+    "category": "gp_clinics",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "RIVER VALLEY",
+    "category": "primary_schools",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "RIVER VALLEY",
+    "category": "supermarkets",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ROCHOR",
+    "category": "childcare_preschool",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ROCHOR",
+    "category": "dental",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ROCHOR",
+    "category": "gp_clinics",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ROCHOR",
+    "category": "primary_schools",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "ROCHOR",
+    "category": "supermarkets",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SELETAR",
+    "category": "childcare_preschool",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "childcare_preschool",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "dental",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "eldercare",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "gp_clinics",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "primary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "secondary_schools",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SEMBAWANG",
+    "category": "supermarkets",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "childcare_preschool",
+    "count": 41
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "dental",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "eldercare",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "gp_clinics",
+    "count": 41
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "primary_schools",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "secondary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SENGKANG",
+    "category": "supermarkets",
+    "count": 21
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "childcare_preschool",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "dental",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "gp_clinics",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "primary_schools",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "secondary_schools",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SERANGOON",
+    "category": "supermarkets",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SINGAPORE RIVER",
+    "category": "childcare_preschool",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SINGAPORE RIVER",
+    "category": "dental",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SINGAPORE RIVER",
+    "category": "gp_clinics",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SINGAPORE RIVER",
+    "category": "supermarkets",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SOUTHERN ISLANDS",
+    "category": "supermarkets",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "SUNGEI KADUT",
+    "category": "supermarkets",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "childcare_preschool",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "dental",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "eldercare",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "gp_clinics",
+    "count": 17
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "primary_schools",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "secondary_schools",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TAMPINES",
+    "category": "supermarkets",
+    "count": 31
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TANGLIN",
+    "category": "childcare_preschool",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TANGLIN",
+    "category": "dental",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TANGLIN",
+    "category": "supermarkets",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TENGAH",
+    "category": "primary_schools",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TENGAH",
+    "category": "supermarkets",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "childcare_preschool",
+    "count": 11
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "dental",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "gp_clinics",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "primary_schools",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "secondary_schools",
+    "count": 6
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TOA PAYOH",
+    "category": "supermarkets",
+    "count": 19
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TUAS",
+    "category": "gp_clinics",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TUAS",
+    "category": "supermarkets",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WESTERN ISLANDS",
+    "category": "gp_clinics",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WESTERN WATER CATCHMENT",
+    "category": "gp_clinics",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WESTERN WATER CATCHMENT",
+    "category": "supermarkets",
+    "count": 3
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "childcare_preschool",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "eldercare",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "gp_clinics",
+    "count": 4
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "primary_schools",
+    "count": 12
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "secondary_schools",
+    "count": 9
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "WOODLANDS",
+    "category": "supermarkets",
+    "count": 26
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "childcare_preschool",
+    "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "dental",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "eldercare",
+    "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "gp_clinics",
+    "count": 7
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "primary_schools",
+    "count": 10
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "secondary_schools",
+    "count": 8
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "YISHUN",
+    "category": "supermarkets",
+    "count": 21
+  }
+]

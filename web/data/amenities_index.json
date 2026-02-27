@@ -1,7 +1,9 @@
 {
-  "updated_at": null,
-  "source": "github_pipeline",
-  "snapshots": [],
+  "updated_at": "2026-02-27T19:39:47.007Z",
+  "source": "overpass+moe_onemap",
+  "snapshots": [
+    "2026Q1"
+  ],
   "categories": [
     "gp_clinics",
     "dental",

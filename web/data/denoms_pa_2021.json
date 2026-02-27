@@ -1,0 +1,2642 @@
+[
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "ADULT_35_54",
+    "residents": 44240
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "ALL",
+    "residents": 160030
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "CHILD_0_6",
+    "residents": 7550
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "CHILD_7_12",
+    "residents": 7550
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 36710
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "TEEN_13_18",
+    "residents": 8670
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 30560
+  },
+  {
+    "year": 2021,
+    "pa": "ANG MO KIO",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 24750
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "ADULT_35_54",
+    "residents": 75620
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "ALL",
+    "residents": 272660
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "CHILD_0_6",
+    "residents": 14330
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "CHILD_7_12",
+    "residents": 14280
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 55290
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "TEEN_13_18",
+    "residents": 15810
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 54940
+  },
+  {
+    "year": 2021,
+    "pa": "BEDOK",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 42390
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "ADULT_35_54",
+    "residents": 22440
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "ALL",
+    "residents": 84740
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "CHILD_0_6",
+    "residents": 4110
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "CHILD_7_12",
+    "residents": 4640
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 16630
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "TEEN_13_18",
+    "residents": 5330
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 18150
+  },
+  {
+    "year": 2021,
+    "pa": "BISHAN",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 13440
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BOON LAY",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "ADULT_35_54",
+    "residents": 45040
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "ALL",
+    "residents": 161040
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "CHILD_0_6",
+    "residents": 11750
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "CHILD_7_12",
+    "residents": 8610
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 23740
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "TEEN_13_18",
+    "residents": 9680
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 38010
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT BATOK",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 24210
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "ADULT_35_54",
+    "residents": 43460
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "ALL",
+    "residents": 149350
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "CHILD_0_6",
+    "residents": 8330
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "CHILD_7_12",
+    "residents": 7780
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 34170
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "TEEN_13_18",
+    "residents": 7270
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 27090
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT MERAH",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 21250
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "ADULT_35_54",
+    "residents": 38370
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "ALL",
+    "residents": 135210
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "CHILD_0_6",
+    "residents": 8350
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "CHILD_7_12",
+    "residents": 8250
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 18790
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "TEEN_13_18",
+    "residents": 9000
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 31140
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT PANJANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 21310
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "ADULT_35_54",
+    "residents": 22670
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "ALL",
+    "residents": 76720
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "CHILD_0_6",
+    "residents": 5240
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "CHILD_7_12",
+    "residents": 6100
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 13370
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "TEEN_13_18",
+    "residents": 5780
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 13670
+  },
+  {
+    "year": 2021,
+    "pa": "BUKIT TIMAH",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 9890
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CENTRAL WATER CATCHMENT",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "ADULT_35_54",
+    "residents": 670
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "ALL",
+    "residents": 1780
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "CHILD_0_6",
+    "residents": 180
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "CHILD_7_12",
+    "residents": 160
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 90
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "TEEN_13_18",
+    "residents": 140
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 360
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 180
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHANGI BAY",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "ADULT_35_54",
+    "residents": 53550
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "ALL",
+    "residents": 189670
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "CHILD_0_6",
+    "residents": 12490
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "CHILD_7_12",
+    "residents": 11100
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 21600
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "TEEN_13_18",
+    "residents": 12860
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 48540
+  },
+  {
+    "year": 2021,
+    "pa": "CHOA CHU KANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 29530
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "ADULT_35_54",
+    "residents": 27380
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "ALL",
+    "residents": 91480
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "CHILD_0_6",
+    "residents": 5530
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "CHILD_7_12",
+    "residents": 5390
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 19250
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "TEEN_13_18",
+    "residents": 5370
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 16410
+  },
+  {
+    "year": 2021,
+    "pa": "CLEMENTI",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 12150
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "ADULT_35_54",
+    "residents": 1290
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "ALL",
+    "residents": 2720
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "CHILD_0_6",
+    "residents": 80
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "CHILD_7_12",
+    "residents": 60
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 230
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "TEEN_13_18",
+    "residents": 60
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 670
+  },
+  {
+    "year": 2021,
+    "pa": "DOWNTOWN CORE",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 330
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "ADULT_35_54",
+    "residents": 30540
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "ALL",
+    "residents": 107880
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "CHILD_0_6",
+    "residents": 5520
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "CHILD_7_12",
+    "residents": 5120
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 21960
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "TEEN_13_18",
+    "residents": 5480
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 22550
+  },
+  {
+    "year": 2021,
+    "pa": "GEYLANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 16710
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "ADULT_35_54",
+    "residents": 61920
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "ALL",
+    "residents": 225570
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "CHILD_0_6",
+    "residents": 13080
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "CHILD_7_12",
+    "residents": 11480
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 38780
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "TEEN_13_18",
+    "residents": 12640
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 50620
+  },
+  {
+    "year": 2021,
+    "pa": "HOUGANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 37050
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "ADULT_35_54",
+    "residents": 20690
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "ALL",
+    "residents": 76010
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "CHILD_0_6",
+    "residents": 3360
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "CHILD_7_12",
+    "residents": 3560
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 15640
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "TEEN_13_18",
+    "residents": 4430
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 16050
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG EAST",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 12280
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "ADULT_35_54",
+    "residents": 77840
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "ALL",
+    "residents": 255700
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "CHILD_0_6",
+    "residents": 14780
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "CHILD_7_12",
+    "residents": 15870
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 35730
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "TEEN_13_18",
+    "residents": 17900
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 57000
+  },
+  {
+    "year": 2021,
+    "pa": "JURONG WEST",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 36580
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "ADULT_35_54",
+    "residents": 29330
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "ALL",
+    "residents": 99000
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "CHILD_0_6",
+    "residents": 5420
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "CHILD_7_12",
+    "residents": 4780
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 21670
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "TEEN_13_18",
+    "residents": 4840
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 18250
+  },
+  {
+    "year": 2021,
+    "pa": "KALLANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 14710
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "LIM CHU KANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "ADULT_35_54",
+    "residents": 620
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "ALL",
+    "residents": 2170
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "CHILD_0_6",
+    "residents": 120
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "CHILD_7_12",
+    "residents": 130
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 300
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "TEEN_13_18",
+    "residents": 150
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 500
+  },
+  {
+    "year": 2021,
+    "pa": "MANDAI",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 350
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA EAST",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINA SOUTH",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "ADULT_35_54",
+    "residents": 13790
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "ALL",
+    "residents": 44920
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "CHILD_0_6",
+    "residents": 2870
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "CHILD_7_12",
+    "residents": 2950
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 9120
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "TEEN_13_18",
+    "residents": 2790
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 7460
+  },
+  {
+    "year": 2021,
+    "pa": "MARINE PARADE",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 5940
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "ADULT_35_54",
+    "residents": 180
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "ALL",
+    "residents": 270
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "CHILD_0_6",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 70
+  },
+  {
+    "year": 2021,
+    "pa": "MUSEUM",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "ADULT_35_54",
+    "residents": 2820
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "ALL",
+    "residents": 8230
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "CHILD_0_6",
+    "residents": 710
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "CHILD_7_12",
+    "residents": 690
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 1100
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "TEEN_13_18",
+    "residents": 530
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 1330
+  },
+  {
+    "year": 2021,
+    "pa": "NEWTON",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 1050
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NORTH-EASTERN ISLANDS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "ADULT_35_54",
+    "residents": 15630
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "ALL",
+    "residents": 49130
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "CHILD_0_6",
+    "residents": 3370
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "CHILD_7_12",
+    "residents": 3390
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 8790
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "TEEN_13_18",
+    "residents": 2830
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 8790
+  },
+  {
+    "year": 2021,
+    "pa": "NOVENA",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 6330
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "ADULT_35_54",
+    "residents": 200
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "ALL",
+    "residents": 320
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "CHILD_0_6",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "CHILD_7_12",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "TEEN_13_18",
+    "residents": 20
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 30
+  },
+  {
+    "year": 2021,
+    "pa": "ORCHARD",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 40
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "ADULT_35_54",
+    "residents": 4970
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "ALL",
+    "residents": 17580
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "CHILD_0_6",
+    "residents": 820
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "CHILD_7_12",
+    "residents": 870
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 4680
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "TEEN_13_18",
+    "residents": 720
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 2770
+  },
+  {
+    "year": 2021,
+    "pa": "OUTRAM",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 2750
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "ADULT_35_54",
+    "residents": 40230
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "ALL",
+    "residents": 145100
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "CHILD_0_6",
+    "residents": 8150
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "CHILD_7_12",
+    "residents": 8210
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 17320
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "TEEN_13_18",
+    "residents": 9890
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 36790
+  },
+  {
+    "year": 2021,
+    "pa": "PASIR RIS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 24510
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PAYA LEBAR",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PIONEER",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "ADULT_35_54",
+    "residents": 64120
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "ALL",
+    "residents": 176720
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "CHILD_0_6",
+    "residents": 21350
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "CHILD_7_12",
+    "residents": 16450
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 14480
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "TEEN_13_18",
+    "residents": 11900
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 33360
+  },
+  {
+    "year": 2021,
+    "pa": "PUNGGOL",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 15060
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "ADULT_35_54",
+    "residents": 27720
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "ALL",
+    "residents": 93720
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "CHILD_0_6",
+    "residents": 5500
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "CHILD_7_12",
+    "residents": 4860
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 20550
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "TEEN_13_18",
+    "residents": 4820
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 17650
+  },
+  {
+    "year": 2021,
+    "pa": "QUEENSTOWN",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 12620
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "ADULT_35_54",
+    "residents": 3800
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "ALL",
+    "residents": 10110
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "CHILD_0_6",
+    "residents": 790
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "CHILD_7_12",
+    "residents": 710
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 1300
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "TEEN_13_18",
+    "residents": 670
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 1680
+  },
+  {
+    "year": 2021,
+    "pa": "RIVER VALLEY",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 1160
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "ADULT_35_54",
+    "residents": 3890
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "ALL",
+    "residents": 12660
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "CHILD_0_6",
+    "residents": 550
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "CHILD_7_12",
+    "residents": 470
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 2940
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "TEEN_13_18",
+    "residents": 540
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 2390
+  },
+  {
+    "year": 2021,
+    "pa": "ROCHOR",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 1880
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "ADULT_35_54",
+    "residents": 110
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "ALL",
+    "residents": 160
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "TEEN_13_18",
+    "residents": 40
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "SELETAR",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "ADULT_35_54",
+    "residents": 33660
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "ALL",
+    "residents": 105240
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "CHILD_0_6",
+    "residents": 9200
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "CHILD_7_12",
+    "residents": 7140
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 9780
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "TEEN_13_18",
+    "residents": 7640
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 25080
+  },
+  {
+    "year": 2021,
+    "pa": "SEMBAWANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 12740
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "ADULT_35_54",
+    "residents": 83750
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "ALL",
+    "residents": 249080
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "CHILD_0_6",
+    "residents": 22340
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "CHILD_7_12",
+    "residents": 19980
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 25900
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "TEEN_13_18",
+    "residents": 17380
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 50780
+  },
+  {
+    "year": 2021,
+    "pa": "SENGKANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 28950
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "ADULT_35_54",
+    "residents": 29850
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "ALL",
+    "residents": 115740
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "CHILD_0_6",
+    "residents": 5420
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "CHILD_7_12",
+    "residents": 5720
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 23600
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "TEEN_13_18",
+    "residents": 6740
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 25670
+  },
+  {
+    "year": 2021,
+    "pa": "SERANGOON",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 18740
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SIMPANG",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "ADULT_35_54",
+    "residents": 1390
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "ALL",
+    "residents": 3240
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "CHILD_0_6",
+    "residents": 350
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "CHILD_7_12",
+    "residents": 280
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 250
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "TEEN_13_18",
+    "residents": 170
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 460
+  },
+  {
+    "year": 2021,
+    "pa": "SINGAPORE RIVER",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 340
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "ADULT_35_54",
+    "residents": 820
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "ALL",
+    "residents": 2010
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "CHILD_0_6",
+    "residents": 210
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "CHILD_7_12",
+    "residents": 160
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 100
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "TEEN_13_18",
+    "residents": 140
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 290
+  },
+  {
+    "year": 2021,
+    "pa": "SOUTHERN ISLANDS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 290
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "STRAITS VIEW",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "ADULT_35_54",
+    "residents": 170
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "ALL",
+    "residents": 550
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "CHILD_7_12",
+    "residents": 30
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 110
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "TEEN_13_18",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 110
+  },
+  {
+    "year": 2021,
+    "pa": "SUNGEI KADUT",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 120
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "ADULT_35_54",
+    "residents": 68620
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "ALL",
+    "residents": 258460
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "CHILD_0_6",
+    "residents": 17010
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "CHILD_7_12",
+    "residents": 13800
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 40690
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "TEEN_13_18",
+    "residents": 14510
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 61810
+  },
+  {
+    "year": 2021,
+    "pa": "TAMPINES",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 42020
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "ADULT_35_54",
+    "residents": 7430
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "ALL",
+    "residents": 21760
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "CHILD_0_6",
+    "residents": 1730
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "CHILD_7_12",
+    "residents": 1870
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 3240
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "TEEN_13_18",
+    "residents": 1470
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 3460
+  },
+  {
+    "year": 2021,
+    "pa": "TANGLIN",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 2560
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TENGAH",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "ADULT_35_54",
+    "residents": 34420
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "ALL",
+    "residents": 123670
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "CHILD_0_6",
+    "residents": 6870
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "CHILD_7_12",
+    "residents": 6210
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 26570
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "TEEN_13_18",
+    "residents": 6480
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 24850
+  },
+  {
+    "year": 2021,
+    "pa": "TOA PAYOH",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 18270
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "TUAS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "ADULT_35_54",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "ALL",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "CHILD_0_6",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "CHILD_7_12",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "TEEN_13_18",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN ISLANDS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "ADULT_35_54",
+    "residents": 210
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "ALL",
+    "residents": 540
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "CHILD_0_6",
+    "residents": 30
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "CHILD_7_12",
+    "residents": 60
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 0
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "TEEN_13_18",
+    "residents": 10
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 170
+  },
+  {
+    "year": 2021,
+    "pa": "WESTERN WATER CATCHMENT",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 60
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "ADULT_35_54",
+    "residents": 73470
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "ALL",
+    "residents": 249320
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "CHILD_0_6",
+    "residents": 15950
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "CHILD_7_12",
+    "residents": 15250
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 26930
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "TEEN_13_18",
+    "residents": 17950
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 63390
+  },
+  {
+    "year": 2021,
+    "pa": "WOODLANDS",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 36380
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "ADULT_35_54",
+    "residents": 64110
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "ALL",
+    "residents": 220000
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "CHILD_0_6",
+    "residents": 15950
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "CHILD_7_12",
+    "residents": 13210
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "SENIOR_65_PLUS",
+    "residents": 30730
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "TEEN_13_18",
+    "residents": 12830
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "YOUNG_ADULT_19_34",
+    "residents": 49740
+  },
+  {
+    "year": 2021,
+    "pa": "YISHUN",
+    "age_group": "YOUNG_SENIOR_55_64",
+    "residents": 33430
+  }
+]
