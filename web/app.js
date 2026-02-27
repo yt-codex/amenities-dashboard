@@ -198,18 +198,33 @@ function setError(text = "") {
 }
 
 function isConfigValid() {
-  return Boolean(CONFIG.APPS_SCRIPT_URL && CONFIG.APPS_SCRIPT_URL.startsWith("http"));
+  return Boolean(CONFIG.DATA_BASE_PATH && String(CONFIG.DATA_BASE_PATH).trim() !== "");
 }
 
-function buildApiUrl(path, params = {}) {
-  const url = new URL(CONFIG.APPS_SCRIPT_URL);
-  url.searchParams.set("path", path);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== "") {
-      url.searchParams.set(key, value);
-    }
-  });
-  return url.toString();
+function buildDataUrl(fileName) {
+  const base = String(CONFIG.DATA_BASE_PATH || "./data").replace(/\/+$/, "");
+  return `${base}/${fileName}`;
+}
+
+function resolveDataFile(path, params = {}) {
+  if (path === "amenities/index") return "amenities_index.json";
+  if (path === "denoms/index") return "denoms_index.json";
+
+  if (path === "amenities") {
+    const geo = String(params.geo || "").toLowerCase();
+    const snapshot = String(params.snapshot || "");
+    if (!geo || !snapshot) throw new Error("Missing required params for amenities data fetch.");
+    return `amenities_${geo}_${snapshot}.json`;
+  }
+
+  if (path === "denoms") {
+    const geo = String(params.geo || "").toLowerCase();
+    const year = String(params.year || "");
+    if (!geo || !year) throw new Error("Missing required params for denominator data fetch.");
+    return `denoms_${geo}_${year}.json`;
+  }
+
+  throw new Error(`Unknown data path: ${path}`);
 }
 
 function asRows(payload) {
@@ -298,15 +313,12 @@ function getGeoNameFromRow(row, geo) {
 }
 
 async function fetchJson(path, params, signal) {
-  const response = await fetch(buildApiUrl(path, params), { signal });
+  const fileName = resolveDataFile(path, params);
+  const response = await fetch(buildDataUrl(fileName), { signal });
   if (!response.ok) {
-    throw new Error(`Request failed (${response.status}) for ${path}`);
+    throw new Error(`Request failed (${response.status}) for ${fileName}`);
   }
-  const body = await response.json();
-  if (body?.error || body?.status >= 400) {
-    throw new Error(body.error || `API error for ${path}`);
-  }
-  return body;
+  return response.json();
 }
 
 async function loadGeoJson(geo) {
@@ -585,8 +597,8 @@ function updateLayer(geoData, valuesByJoinKey, options) {
 async function render() {
   if (!isConfigValid()) {
     ui.configWarning.hidden = false;
-    ui.configWarning.textContent = "CONFIG.APPS_SCRIPT_URL is not configured. Update web/config.js.";
-    setStatus("Cannot render without APPS_SCRIPT_URL.", "error");
+    ui.configWarning.textContent = "CONFIG.DATA_BASE_PATH is not configured. Update web/config.js.";
+    setStatus("Cannot render without DATA_BASE_PATH.", "error");
     return;
   }
 
@@ -600,7 +612,7 @@ async function render() {
   const { geo, category, snapshot, metric, ageGroup } = state.selection;
   if (!snapshot) {
     setStatus("No amenity snapshot available yet.", "warn");
-    setError("No snapshots found in amenities index. Build one in Apps Script, then refresh.");
+    setError("No snapshots found in amenities index. Run the GitHub data pipeline, then refresh.");
     return;
   }
 
@@ -678,7 +690,7 @@ async function bootstrap() {
 
   if (!isConfigValid()) {
     ui.configWarning.hidden = false;
-    ui.configWarning.textContent = "CONFIG.APPS_SCRIPT_URL is not configured. Update web/config.js.";
+    ui.configWarning.textContent = "CONFIG.DATA_BASE_PATH is not configured. Update web/config.js.";
     return;
   }
 

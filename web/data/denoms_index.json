@@ -1,0 +1,19 @@
+{
+  "updated_at": null,
+  "source": "github_pipeline",
+  "vintages": [],
+  "age_groups": [
+    "ALL",
+    "CHILD_0_6",
+    "CHILD_7_12",
+    "TEEN_13_18",
+    "YOUNG_ADULT_19_34",
+    "ADULT_35_54",
+    "YOUNG_SENIOR_55_64",
+    "SENIOR_65_PLUS"
+  ],
+  "geos": [
+    "pa",
+    "sz"
+  ]
+}

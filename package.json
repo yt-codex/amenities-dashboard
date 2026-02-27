@@ -1,0 +1,14 @@
+{
+  "name": "amenities-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data:all": "node scripts/pipeline.mjs all",
+    "data:denoms": "node scripts/pipeline.mjs denoms",
+    "data:amenities": "node scripts/pipeline.mjs amenities"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "csv-parse": "^5.5.6"
+  }
+}

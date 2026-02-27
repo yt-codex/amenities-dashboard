@@ -1,0 +1,97 @@
+name: Refresh Dashboard Data
+
+on:
+  schedule:
+    - cron: "15 0 1 * *"
+  workflow_dispatch:
+    inputs:
+      force_denoms:
+        description: Force denominator refresh outside Jan/Jul
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      force_amenities:
+        description: Force amenities refresh outside quarter months
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      year:
+        description: Optional specific denominator year (YYYY)
+        required: false
+        default: ""
+        type: string
+      snapshot:
+        description: Optional specific amenity snapshot (YYYYQn)
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run data pipeline
+        env:
+          ONEMAP_EMAIL: ${{ secrets.ONEMAP_EMAIL }}
+          ONEMAP_PASSWORD: ${{ secrets.ONEMAP_PASSWORD }}
+          ONEMAP_TOKEN: ${{ secrets.ONEMAP_TOKEN }}
+          ONEMAP_TOKEN_EXP_MS: ${{ secrets.ONEMAP_TOKEN_EXP_MS }}
+          FORCE_DENOMS: ${{ github.event.inputs.force_denoms || 'false' }}
+          FORCE_AMENITIES: ${{ github.event.inputs.force_amenities || 'false' }}
+          TARGET_YEAR: ${{ github.event.inputs.year || '' }}
+          TARGET_SNAPSHOT: ${{ github.event.inputs.snapshot || '' }}
+        run: |
+          set -euo pipefail
+          args="all"
+          if [ "${FORCE_DENOMS}" = "true" ]; then
+            args="$args --force-denoms"
+          fi
+          if [ "${FORCE_AMENITIES}" = "true" ]; then
+            args="$args --force-amenities"
+          fi
+          if [ -n "${TARGET_YEAR}" ]; then
+            args="$args --year ${TARGET_YEAR}"
+          fi
+          if [ -n "${TARGET_SNAPSHOT}" ]; then
+            args="$args --snapshot ${TARGET_SNAPSHOT}"
+          fi
+          node scripts/pipeline.mjs $args
+
+      - name: Commit and push data changes
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add web/data scripts/cache/onemap_geocode_cache.json
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore(data): refresh generated datasets [skip ci]"
+          git push

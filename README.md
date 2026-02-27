@@ -1,70 +1,74 @@
 # Singapore Amenities Explorer
 
-Singapore Amenities Explorer is a static Leaflet dashboard for comparing amenity coverage across Singapore planning areas and subzones.
+Singapore Amenities Explorer is a static Leaflet dashboard hosted on GitHub Pages.
+All data generation now runs directly in GitHub Actions and writes versioned JSON files into this repository.
 
-Frontend is hosted from this repo (GitHub Pages), while Google Apps Script serves JSON endpoints for:
-- amenity snapshot counts, and
-- resident denominator vintages.
+## Architecture
 
-## Project Structure
+- Frontend: `web/` (static app)
+- Generated data: `web/data/`
+- ETL pipeline: `scripts/pipeline.mjs`
+- Scheduled automation: `.github/workflows/data-refresh.yml`
 
-```text
-.github/workflows/   GitHub Actions automation
-apps_script/         Apps Script ETL + API routes
-web/                 Static dashboard assets
-index.html           Root redirect to /web/
-```
+The app no longer depends on Google Apps Script or Google Drive.
 
-## Configure Frontend
+## Frontend Data Source
 
-Set Apps Script URL in `web/config.js`:
-
-```js
-export const CONFIG = {
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/.../exec",
-};
-```
+`web/app.js` loads static files from `web/data/` using `CONFIG.DATA_BASE_PATH` in `web/config.js`.
 
 ## Run Locally
 
-Serve over HTTP (not `file://`):
+1. Install dependencies:
+   - `npm install`
+2. (Optional) refresh data:
+   - `npm run data:all`
+3. Serve static files:
+   - `python -m http.server 8000`
+4. Open:
+   - `http://localhost:8000/web/`
 
-```bash
-python -m http.server 8000
-```
+## Data Pipeline Commands
 
-Open:
+- `npm run data:all`
+- `npm run data:denoms`
+- `npm run data:amenities`
 
-- `http://localhost:8000/web/`
+Extra flags:
 
-## Deploy to GitHub Pages
+- `node scripts/pipeline.mjs all --force-denoms --force-amenities`
+- `node scripts/pipeline.mjs denoms --year 2025`
+- `node scripts/pipeline.mjs amenities --snapshot 2026Q1 --force-amenities`
 
-1. Push this repository to GitHub.
-2. In repository Settings -> Pages, publish from the repository root.
-3. Visit:
-   - `https://<org-or-user>.github.io/<repo>/`
-
-Root now redirects to `./web/`, so the dashboard opens directly from the base Pages URL.
-
-## Quarterly Amenity Refresh Automation
+## GitHub Actions Setup
 
 Workflow file:
 
-- `.github/workflows/quarterly-amenity-refresh.yml`
+- `.github/workflows/data-refresh.yml`
 
-It runs on Jan/Apr/Jul/Oct and can also be triggered manually.
+Schedule:
 
-Required repository secrets:
+- Runs monthly on day 1 (UTC), with month guards in the script:
+  - denoms: Jan/Jul
+  - amenities: Jan/Apr/Jul/Oct
 
-- `APPS_SCRIPT_URL`
-- `APPS_SCRIPT_ADMIN_TOKEN`
+Required repository secrets for amenities geocoding:
 
-Apps Script must also have script property:
+- `ONEMAP_EMAIL`
+- `ONEMAP_PASSWORD`
 
-- `ADMIN_TRIGGER_TOKEN` (same value as `APPS_SCRIPT_ADMIN_TOKEN`)
+Optional repository secrets:
+
+- `ONEMAP_TOKEN`
+- `ONEMAP_TOKEN_EXP_MS`
+
+## Why root URL now works
+
+Root `index.html` redirects to `./web/`, so this opens the dashboard directly:
+
+- `https://yt-codex.github.io/amenities-dashboard/`
 
 ## Notes
 
-- Boundary GeoJSON files are in `web/assets/`.
-- If `APPS_SCRIPT_URL` is missing/invalid, frontend blocks map rendering and shows a config warning.
-- This dashboard uses public datasets/APIs; data quality depends on upstream sources.
+- Generated files are committed back into the repo by the workflow.
+- Geocode cache is stored in `scripts/cache/onemap_geocode_cache.json`.
+- Boundary GeoJSON files are under `web/assets/`.

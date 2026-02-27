@@ -1,0 +1,18 @@
+{
+  "updated_at": null,
+  "source": "github_pipeline",
+  "snapshots": [],
+  "categories": [
+    "gp_clinics",
+    "dental",
+    "childcare_preschool",
+    "primary_schools",
+    "secondary_schools",
+    "supermarkets",
+    "eldercare"
+  ],
+  "geos": [
+    "pa",
+    "sz"
+  ]
+}
