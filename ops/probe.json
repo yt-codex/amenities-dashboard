@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "status": "OK",
+  "last_run_time": "2026-02-28T04:41:56Z",
+  "duration_seconds": 24.0,
+  "freshness": {
+    "max_date": "2026-02-28T04:41:56Z",
+    "lag_seconds": 1.268784,
+    "stale": false
+  },
+  "row_counts": {
+    "denoms_vintages": 5,
+    "amenities_snapshots": 1,
+    "amenities_rows_sz": 856,
+    "amenities_rows_pa": 234,
+    "schools_primary_points": 179,
+    "schools_secondary_points": 133,
+    "overpass_points_total": 1785
+  },
+  "schema_hash": "641d6de65cd68382d614dcb72f59b401b7be2ddce1cae5221dc8b44b81275ab1",
+  "key_checks": [
+    {
+      "name": "singstat_discovery",
+      "status": "OK",
+      "detail": "SingStat denominator links discovered.",
+      "metric": {
+        "years": 5
+      }
+    },
+    {
+      "name": "singstat_fetch_parse",
+      "status": "OK",
+      "detail": "SingStat ZIP/CSV parse succeeded.",
+      "metric": {
+        "rows": 60424,
+        "dropped": 0
+      }
+    },
+    {
+      "name": "moe_datagov_fetch",
+      "status": "OK",
+      "detail": "MOE datastore fetch succeeded."
+    },
+    {
+      "name": "onemap_auth_geocode",
+      "status": "OK",
+      "detail": "OneMap auth/geocode completed with measured success rate.",
+      "metric": {
+        "eligible": 312,
+        "resolved": 312,
+        "unresolved": 0,
+        "success_rate": 1.0
+      }
+    },
+    {
+      "name": "overpass_fetch",
+      "status": "OK",
+      "detail": "Overpass fetch succeeded across OSM categories."
+    },
+    {
+      "name": "denom_tests",
+      "status": "OK",
+      "detail": "Denominator tests passed."
+    },
+    {
+      "name": "amenity_tests",
+      "status": "OK",
+      "detail": "Amenity tests passed."
+    },
+    {
+      "name": "output_write",
+      "status": "OK",
+      "detail": "Output files written and readable."
+    }
+  ],
+  "warnings": [],
+  "artifact_links": [
+    {
+      "label": "workflow_run",
+      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22513557420"
+    },
+    {
+      "label": "denoms_index",
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/web/data/denoms_index.json"
+    },
+    {
+      "label": "amenities_index",
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/web/data/amenities_index.json"
+    },
+    {
+      "label": "ops_probe",
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/ops/probe.json"
+    }
+  ],
+  "meta": {
+    "repo": "yt-codex/amenities-dashboard",
+    "run_id": "22513557420",
+    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22513557420",
+    "workflow": "Refresh Dashboard Data",
+    "job": "refresh",
+    "sha": "6f334af2849055bf7d8b7340fec56e682569058a"
+  }
+}
