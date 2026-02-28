@@ -797,6 +797,9 @@ async function buildSchoolPointsFromMoe() {
   const rows = await fetchAllMoeSchoolGeneralInfo();
   const geocodeCache = (await readJson(CONFIG.ONEMAP_GEOCODE_CACHE_FILE)) || {};
   let cacheChanged = false;
+  let geocodeEligible = 0;
+  let geocodeResolved = 0;
+  let geocodeUnresolved = 0;
 
   const primary = [];
   const secondary = [];
@@ -815,6 +818,7 @@ async function buildSchoolPointsFromMoe() {
 
     const searchVal = postal || (address ? `${address} SINGAPORE` : name);
     if (!searchVal) continue;
+    geocodeEligible += 1;
 
     const cacheKey = normalizeName(searchVal);
     let geocode = geocodeCache[cacheKey] || null;
@@ -824,7 +828,11 @@ async function buildSchoolPointsFromMoe() {
       cacheChanged = true;
       await sleep(140);
     }
-    if (!geocode) continue;
+    if (!geocode) {
+      geocodeUnresolved += 1;
+      continue;
+    }
+    geocodeResolved += 1;
 
     const baseMeta = {
       postal: postal || null,
@@ -874,6 +882,11 @@ async function buildSchoolPointsFromMoe() {
   if (cacheChanged) {
     await writeJson(CONFIG.ONEMAP_GEOCODE_CACHE_FILE, geocodeCache);
   }
+
+  const geocodeRate = geocodeEligible > 0 ? geocodeResolved / geocodeEligible : 1;
+  log(
+    `OneMap geocode stats: eligible=${geocodeEligible}, resolved=${geocodeResolved}, unresolved=${geocodeUnresolved}, rate=${geocodeRate.toFixed(4)}`
+  );
 
   return { primary_schools: primary, secondary_schools: secondary };
 }

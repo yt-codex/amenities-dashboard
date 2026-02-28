@@ -55,6 +55,8 @@ jobs:
         run: npm ci
 
       - name: Run data pipeline
+        id: pipeline
+        continue-on-error: true
         env:
           ONEMAP_EMAIL: ${{ secrets.ONEMAP_EMAIL }}
           ONEMAP_PASSWORD: ${{ secrets.ONEMAP_PASSWORD }}
@@ -65,7 +67,10 @@ jobs:
           TARGET_YEAR: ${{ github.event.inputs.year || '' }}
           TARGET_SNAPSHOT: ${{ github.event.inputs.snapshot || '' }}
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          set +e
+          START_TS=$(date -u +%s)
+          START_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           args="all"
           if [ "${FORCE_DENOMS}" = "true" ]; then
             args="$args --force-denoms"
@@ -79,9 +84,48 @@ jobs:
           if [ -n "${TARGET_SNAPSHOT}" ]; then
             args="$args --snapshot ${TARGET_SNAPSHOT}"
           fi
-          node scripts/pipeline.mjs $args
+          PIPELINE_LOG="${RUNNER_TEMP}/pipeline.log"
+          node scripts/pipeline.mjs $args 2>&1 | tee "${PIPELINE_LOG}"
+          PIPELINE_STATUS=${PIPESTATUS[0]}
+          END_TS=$(date -u +%s)
+          END_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "start_time=${START_TIME}" >> "$GITHUB_OUTPUT"
+          echo "end_time=${END_TIME}" >> "$GITHUB_OUTPUT"
+          echo "duration_seconds=$((END_TS - START_TS))" >> "$GITHUB_OUTPUT"
+          echo "status_code=${PIPELINE_STATUS}" >> "$GITHUB_OUTPUT"
+          echo "log_path=${PIPELINE_LOG}" >> "$GITHUB_OUTPUT"
+          exit "${PIPELINE_STATUS}"
+
+      - name: Setup Python
+        if: always()
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Emit probe
+        if: always()
+        continue-on-error: true
+        env:
+          FORCE_DENOMS: ${{ github.event.inputs.force_denoms || 'false' }}
+          FORCE_AMENITIES: ${{ github.event.inputs.force_amenities || 'false' }}
+          TARGET_YEAR: ${{ github.event.inputs.year || '' }}
+          TARGET_SNAPSHOT: ${{ github.event.inputs.snapshot || '' }}
+        run: |
+          python ops/emit_probe.py \
+            --output ops/probe.json \
+            --pipeline-log "${{ steps.pipeline.outputs.log_path }}" \
+            --pipeline-outcome "${{ steps.pipeline.outcome }}" \
+            --start-time "${{ steps.pipeline.outputs.start_time }}" \
+            --end-time "${{ steps.pipeline.outputs.end_time }}" \
+            --duration-seconds "${{ steps.pipeline.outputs.duration_seconds }}" \
+            --force-denoms "${FORCE_DENOMS}" \
+            --force-amenities "${FORCE_AMENITIES}" \
+            --target-year "${TARGET_YEAR}" \
+            --target-snapshot "${TARGET_SNAPSHOT}" \
+            --artifact "workflow_run=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Commit and push data changes
+        if: ${{ steps.pipeline.outcome == 'success' }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -95,3 +139,27 @@ jobs:
 
           git commit -m "chore(data): refresh generated datasets [skip ci]"
           git push
+
+      - name: Commit latest probe
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f ops/probe.json ]; then
+            echo "Probe file is missing; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ops/probe.json
+          if git diff --cached --quiet; then
+            echo "No probe changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(ops): refresh probe [skip ci]"
+          git push
+
+      - name: Preserve pipeline failure status
+        if: ${{ always() && steps.pipeline.outcome == 'failure' }}
+        run: |
+          echo "Pipeline failed, marking workflow as failed after probe emission."
+          exit 1
