@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "status": "OK",
-  "last_run_time": "2026-02-28T04:41:56Z",
-  "duration_seconds": 24.0,
+  "last_run_time": "2026-03-01T05:12:19Z",
+  "duration_seconds": 0.0,
   "freshness": {
     "max_date": "2026-02-28T04:41:56Z",
-    "lag_seconds": 1.268784,
+    "lag_seconds": 88223.811238,
     "stale": false
   },
   "row_counts": {
@@ -22,50 +22,37 @@
     {
       "name": "singstat_discovery",
       "status": "OK",
-      "detail": "SingStat denominator links discovered.",
-      "metric": {
-        "years": 5
-      }
+      "detail": "Denominator refresh not due this month."
     },
     {
       "name": "singstat_fetch_parse",
       "status": "OK",
-      "detail": "SingStat ZIP/CSV parse succeeded.",
-      "metric": {
-        "rows": 60424,
-        "dropped": 0
-      }
+      "detail": "Denominator fetch/parse not due this month."
     },
     {
       "name": "moe_datagov_fetch",
       "status": "OK",
-      "detail": "MOE datastore fetch succeeded."
+      "detail": "Amenities refresh not due this month."
     },
     {
       "name": "onemap_auth_geocode",
       "status": "OK",
-      "detail": "OneMap auth/geocode completed with measured success rate.",
-      "metric": {
-        "eligible": 312,
-        "resolved": 312,
-        "unresolved": 0,
-        "success_rate": 1.0
-      }
+      "detail": "OneMap geocoding not due this month."
     },
     {
       "name": "overpass_fetch",
       "status": "OK",
-      "detail": "Overpass fetch succeeded across OSM categories."
+      "detail": "Overpass fetch not due this month."
     },
     {
       "name": "denom_tests",
       "status": "OK",
-      "detail": "Denominator tests passed."
+      "detail": "Denominator tests skipped because refresh is not due."
     },
     {
       "name": "amenity_tests",
       "status": "OK",
-      "detail": "Amenity tests passed."
+      "detail": "Amenity tests skipped because refresh is not due."
     },
     {
       "name": "output_write",
@@ -77,27 +64,27 @@
   "artifact_links": [
     {
       "label": "workflow_run",
-      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22513557420"
+      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22536562430"
     },
     {
       "label": "denoms_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/web/data/denoms_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/5e988b8df21fe7163c84ee7aacabac5dd66e74a0/web/data/denoms_index.json"
     },
     {
       "label": "amenities_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/web/data/amenities_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/5e988b8df21fe7163c84ee7aacabac5dd66e74a0/web/data/amenities_index.json"
     },
     {
       "label": "ops_probe",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/6f334af2849055bf7d8b7340fec56e682569058a/ops/probe.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/5e988b8df21fe7163c84ee7aacabac5dd66e74a0/ops/probe.json"
     }
   ],
   "meta": {
     "repo": "yt-codex/amenities-dashboard",
-    "run_id": "22513557420",
-    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22513557420",
+    "run_id": "22536562430",
+    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/22536562430",
     "workflow": "Refresh Dashboard Data",
     "job": "refresh",
-    "sha": "6f334af2849055bf7d8b7340fec56e682569058a"
+    "sha": "5e988b8df21fe7163c84ee7aacabac5dd66e74a0"
   }
 }
