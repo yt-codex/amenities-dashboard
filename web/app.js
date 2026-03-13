@@ -145,11 +145,6 @@ function getElementByIdWithFallback(primaryId, ...fallbackIds) {
 }
 
 const ui = {
-  heroStatusBadge: document.getElementById("heroStatusBadge"),
-  heroGeoValue: document.getElementById("heroGeoValue"),
-  heroSnapshotValue: document.getElementById("heroSnapshotValue"),
-  heroMetricValue: document.getElementById("heroMetricValue"),
-  selectionPills: document.getElementById("selectionPills"),
   geoSelect: document.getElementById("geoSelect"),
   categorySelect: document.getElementById("categorySelect"),
   categoryInfoButton: document.getElementById("categoryInfoButton"),
@@ -207,10 +202,6 @@ const state = {
 function setStatus(text, type = "info") {
   ui.statusLine.textContent = text;
   ui.statusLine.className = `status ${type}`;
-  if (ui.heroStatusBadge) {
-    ui.heroStatusBadge.textContent = text;
-    ui.heroStatusBadge.className = `hero-status hero-status-${type}`;
-  }
 }
 
 function setError(text = "") {
@@ -265,50 +256,6 @@ function getCategoryLabel(key) {
 function getCategoryInfo(key) {
   const normalizedKey = toCategoryKey(key);
   return CATEGORY_INFO[normalizedKey] || DEFAULT_CATEGORY_INFO;
-}
-
-function getMetricLabel(metric) {
-  return metric === "PER_1000" ? "Per 1,000" : "Count";
-}
-
-function getAgeGroupLabel(ageGroup) {
-  return AGE_GROUP_LABELS[ageGroup] || ageGroup;
-}
-
-function updateHeroSummary() {
-  if (!ui.heroGeoValue || !ui.heroSnapshotValue || !ui.heroMetricValue || !ui.selectionPills) return;
-
-  const geoLabel = GEO_CONFIG[state.selection.geo]?.label || String(state.selection.geo || "").toUpperCase();
-  ui.heroGeoValue.textContent = geoLabel;
-  ui.heroSnapshotValue.textContent = state.selection.snapshot || "Waiting";
-  ui.heroMetricValue.textContent = getMetricLabel(state.selection.metric);
-
-  const pills = [
-    { label: "Category", value: getCategoryLabel(state.selection.category) },
-    { label: "View", value: geoLabel },
-    { label: "Metric", value: getMetricLabel(state.selection.metric) },
-  ];
-
-  if (state.selection.metric === "PER_1000") {
-    pills.push({ label: "Age", value: getAgeGroupLabel(state.selection.ageGroup) });
-  }
-
-  ui.selectionPills.innerHTML = "";
-  pills.forEach((pill) => {
-    const node = document.createElement("div");
-    node.className = "selection-pill";
-
-    const label = document.createElement("span");
-    label.className = "selection-pill-label";
-    label.textContent = pill.label;
-
-    const value = document.createElement("strong");
-    value.className = "selection-pill-value";
-    value.textContent = pill.value;
-
-    node.append(label, value);
-    ui.selectionPills.appendChild(node);
-  });
 }
 
 function getCategoriesFromIndex(indexPayload) {
@@ -782,7 +729,6 @@ async function render() {
 }
 
 async function bootstrap() {
-  updateHeroSummary();
   setCategoryOptions(state.availableCategories);
   if (!state.availableCategories.includes(state.selection.category)) {
     state.selection.category = state.availableCategories[0] || "";
@@ -792,7 +738,7 @@ async function bootstrap() {
   AGE_GROUPS.forEach((age) => {
     const option = document.createElement("option");
     option.value = age;
-    option.textContent = age;
+    option.textContent = AGE_GROUP_LABELS[age] || age;
     ui.ageGroupSelect.appendChild(option);
   });
 
@@ -835,7 +781,6 @@ async function bootstrap() {
   }
 
   updateCategoryInfoTooltip();
-  updateHeroSummary();
   if (!state.selection.snapshot) {
     setStatus("No amenity snapshots are available.", "warn");
     return;
@@ -851,7 +796,6 @@ function syncSelectionAndRender() {
   state.selection.ageGroup = ui.ageGroupSelect.value;
   ui.ageGroupSelect.disabled = state.selection.metric !== "PER_1000";
   updateCategoryInfoTooltip();
-  updateHeroSummary();
   render();
 }
 

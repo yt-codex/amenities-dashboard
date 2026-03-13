@@ -16,7 +16,7 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="./styles.css?v=20260314-ui2" />
+    <link rel="stylesheet" href="./styles.css?v=20260314-ui3" />
   </head>
   <body>
     <header>
@@ -31,103 +31,78 @@
       </p>
     </header>
 
+    <section class="filter-bar" aria-label="Map filters">
+      <div class="filter-bar-shell">
+        <div class="filter-bar-intro">
+          <p class="filter-kicker">Filter panel</p>
+          <p class="filter-copy">Switch the geography, category, snapshot, and metric without losing the map.</p>
+        </div>
+
+        <div class="filter-grid">
+          <div class="control-field">
+            <label for="geoSelect">Geography</label>
+            <div class="select-wrap">
+              <select id="geoSelect">
+                <option value="pa">Planning Area</option>
+                <option value="sz">Subzone</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-field">
+            <div class="field-header">
+              <label for="categorySelect">Category</label>
+              <button
+                id="categoryInfoButton"
+                type="button"
+                class="info-button"
+                aria-label="Show category definition"
+                aria-expanded="false"
+                aria-controls="categoryInfoTooltip"
+              >
+                ?
+              </button>
+              <div id="categoryInfoTooltip" class="category-tooltip" role="tooltip" hidden>
+                <div id="categoryInfoTitle" class="tooltip-title">Category</div>
+                <div id="categoryInfoSource">Source: -</div>
+                <div id="categoryInfoIncludes">No definition available.</div>
+              </div>
+            </div>
+            <div class="select-wrap">
+              <select id="categorySelect"></select>
+            </div>
+          </div>
+
+          <div class="control-field">
+            <label for="snapshotSelect">Snapshot</label>
+            <div class="select-wrap">
+              <select id="snapshotSelect"></select>
+            </div>
+          </div>
+
+          <div class="control-field">
+            <label for="metricSelect">Metric</label>
+            <div class="select-wrap">
+              <select id="metricSelect">
+                <option value="COUNT">COUNT</option>
+                <option value="PER_1000">PER_1000</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-field">
+            <label for="ageGroupSelect">Age Group</label>
+            <div class="select-wrap">
+              <select id="ageGroupSelect"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <main>
       <aside id="panel">
         <div class="panel-shell">
-          <section class="panel-hero">
-            <div class="panel-hero-topline">
-              <p class="panel-kicker">Map Workspace</p>
-              <div id="heroStatusBadge" class="hero-status hero-status-info">Initializing</div>
-            </div>
-            <h2 class="panel-hero-title">Shape the view, then read the strongest service clusters.</h2>
-            <p class="panel-hero-copy">
-              Filter the geography, switch metrics, and turn the map into a quick story about access.
-            </p>
-            <div class="panel-hero-stats">
-              <div class="hero-stat">
-                <span class="hero-stat-label">Geography</span>
-                <strong id="heroGeoValue">Planning Area</strong>
-              </div>
-              <div class="hero-stat">
-                <span class="hero-stat-label">Snapshot</span>
-                <strong id="heroSnapshotValue">-</strong>
-              </div>
-              <div class="hero-stat">
-                <span class="hero-stat-label">Metric</span>
-                <strong id="heroMetricValue">COUNT</strong>
-              </div>
-            </div>
-            <div id="selectionPills" class="selection-pills"></div>
-          </section>
-
-          <section class="panel-section panel-section-controls">
-            <div class="section-header">
-              <p class="section-kicker">Filters</p>
-              <h2>Controls</h2>
-              <p class="section-copy">Set the lens for the map and rankings.</p>
-            </div>
-
-            <div class="control-stack">
-              <div class="control-field">
-                <label for="geoSelect">Geography</label>
-                <div class="select-wrap">
-                  <select id="geoSelect">
-                    <option value="pa">Planning Area</option>
-                    <option value="sz">Subzone</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="control-field">
-                <div class="field-header">
-                  <label for="categorySelect">Category</label>
-                  <button
-                    id="categoryInfoButton"
-                    type="button"
-                    class="info-button"
-                    aria-label="Show category definition"
-                    aria-expanded="false"
-                    aria-controls="categoryInfoTooltip"
-                  >
-                    ?
-                  </button>
-                  <div id="categoryInfoTooltip" class="category-tooltip" role="tooltip" hidden>
-                    <div id="categoryInfoTitle" class="tooltip-title">Category</div>
-                    <div id="categoryInfoSource">Source: -</div>
-                    <div id="categoryInfoIncludes">No definition available.</div>
-                  </div>
-                </div>
-                <div class="select-wrap">
-                  <select id="categorySelect"></select>
-                </div>
-              </div>
-
-              <div class="control-field">
-                <label for="snapshotSelect">Snapshot</label>
-                <div class="select-wrap">
-                  <select id="snapshotSelect"></select>
-                </div>
-              </div>
-
-              <div class="control-field">
-                <label for="metricSelect">Metric</label>
-                <div class="select-wrap">
-                  <select id="metricSelect">
-                    <option value="COUNT">COUNT</option>
-                    <option value="PER_1000">PER_1000</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="control-field">
-                <label for="ageGroupSelect">Age Group</label>
-                <div class="select-wrap">
-                  <select id="ageGroupSelect"></select>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <section class="panel-section panel-section-status">
             <div class="section-header">
               <p class="section-kicker">System</p>
@@ -170,6 +145,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script type="module" src="./app.js?v=20260314-ui2"></script>
+    <script type="module" src="./app.js?v=20260314-ui3"></script>
   </body>
 </html>
