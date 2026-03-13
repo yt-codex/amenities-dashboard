@@ -59,6 +59,17 @@ const CATEGORY_INFO = {
   },
 };
 
+const AGE_GROUP_LABELS = {
+  ALL: "All residents",
+  CHILD_0_6: "Ages 0-6",
+  CHILD_7_12: "Ages 7-12",
+  TEEN_13_18: "Ages 13-18",
+  YOUNG_ADULT_19_34: "Ages 19-34",
+  ADULT_35_54: "Ages 35-54",
+  YOUNG_SENIOR_55_64: "Ages 55-64",
+  SENIOR_65_PLUS: "Ages 65+",
+};
+
 
 const CATEGORY_ALIASES = {
   gp_clinics: "gp_clinics",
@@ -134,6 +145,11 @@ function getElementByIdWithFallback(primaryId, ...fallbackIds) {
 }
 
 const ui = {
+  heroStatusBadge: document.getElementById("heroStatusBadge"),
+  heroGeoValue: document.getElementById("heroGeoValue"),
+  heroSnapshotValue: document.getElementById("heroSnapshotValue"),
+  heroMetricValue: document.getElementById("heroMetricValue"),
+  selectionPills: document.getElementById("selectionPills"),
   geoSelect: document.getElementById("geoSelect"),
   categorySelect: document.getElementById("categorySelect"),
   categoryInfoButton: document.getElementById("categoryInfoButton"),
@@ -191,6 +207,10 @@ const state = {
 function setStatus(text, type = "info") {
   ui.statusLine.textContent = text;
   ui.statusLine.className = `status ${type}`;
+  if (ui.heroStatusBadge) {
+    ui.heroStatusBadge.textContent = text;
+    ui.heroStatusBadge.className = `hero-status hero-status-${type}`;
+  }
 }
 
 function setError(text = "") {
@@ -245,6 +265,50 @@ function getCategoryLabel(key) {
 function getCategoryInfo(key) {
   const normalizedKey = toCategoryKey(key);
   return CATEGORY_INFO[normalizedKey] || DEFAULT_CATEGORY_INFO;
+}
+
+function getMetricLabel(metric) {
+  return metric === "PER_1000" ? "Per 1,000" : "Count";
+}
+
+function getAgeGroupLabel(ageGroup) {
+  return AGE_GROUP_LABELS[ageGroup] || ageGroup;
+}
+
+function updateHeroSummary() {
+  if (!ui.heroGeoValue || !ui.heroSnapshotValue || !ui.heroMetricValue || !ui.selectionPills) return;
+
+  const geoLabel = GEO_CONFIG[state.selection.geo]?.label || String(state.selection.geo || "").toUpperCase();
+  ui.heroGeoValue.textContent = geoLabel;
+  ui.heroSnapshotValue.textContent = state.selection.snapshot || "Waiting";
+  ui.heroMetricValue.textContent = getMetricLabel(state.selection.metric);
+
+  const pills = [
+    { label: "Category", value: getCategoryLabel(state.selection.category) },
+    { label: "View", value: geoLabel },
+    { label: "Metric", value: getMetricLabel(state.selection.metric) },
+  ];
+
+  if (state.selection.metric === "PER_1000") {
+    pills.push({ label: "Age", value: getAgeGroupLabel(state.selection.ageGroup) });
+  }
+
+  ui.selectionPills.innerHTML = "";
+  pills.forEach((pill) => {
+    const node = document.createElement("div");
+    node.className = "selection-pill";
+
+    const label = document.createElement("span");
+    label.className = "selection-pill-label";
+    label.textContent = pill.label;
+
+    const value = document.createElement("strong");
+    value.className = "selection-pill-value";
+    value.textContent = pill.value;
+
+    node.append(label, value);
+    ui.selectionPills.appendChild(node);
+  });
 }
 
 function getCategoriesFromIndex(indexPayload) {
@@ -479,13 +543,38 @@ function updateLegend(metric, breaks, category) {
     const min = i === 0 ? 0 : breaks[i - 1];
     const row = document.createElement("div");
     row.className = "legend-row";
-    row.innerHTML = `<span class="legend-swatch" style="background:${COLORS[i]}"></span><span>${min.toFixed(2)} - ${max.toFixed(2)}</span>`;
+
+    const swatch = document.createElement("span");
+    swatch.className = "legend-swatch";
+    swatch.style.background = COLORS[i];
+
+    const range = document.createElement("span");
+    range.className = "legend-range";
+    range.textContent = `${min.toFixed(2)} - ${max.toFixed(2)}`;
+
+    const band = document.createElement("span");
+    band.className = "legend-band";
+    band.textContent = `Band ${i + 1}`;
+
+    row.append(swatch, range, band);
     ui.legendBins.appendChild(row);
   });
 
   const missing = document.createElement("div");
   missing.className = "legend-row";
-  missing.innerHTML = `<span class="legend-swatch" style="background:${MISSING_COLOR}"></span><span>Missing / unmatched</span>`;
+  const swatch = document.createElement("span");
+  swatch.className = "legend-swatch";
+  swatch.style.background = MISSING_COLOR;
+
+  const label = document.createElement("span");
+  label.className = "legend-range";
+  label.textContent = "Missing / unmatched";
+
+  const badge = document.createElement("span");
+  badge.className = "legend-band legend-band-muted";
+  badge.textContent = "No match";
+
+  missing.append(swatch, label, badge);
   ui.legendBins.appendChild(missing);
 }
 
@@ -532,9 +621,38 @@ function updateTopAreas(features, valuesByJoinKey, options) {
   ui.topAreasList.innerHTML = "";
   topRows.forEach((row) => {
     const item = document.createElement("li");
+    item.className = "top-area-item";
     const primary = options.metric === "PER_1000" ? formatMetric(row.value, "PER_1000") : formatMetric(row.value, "COUNT");
-    const secondary = options.metric === "PER_1000" ? ` (count: ${formatMetric(row.count, "COUNT")})` : "";
-    item.textContent = `#${row.rank} ${row.area}: ${primary}${secondary}`;
+
+    const rank = document.createElement("span");
+    rank.className = "top-area-rank";
+    rank.textContent = `#${row.rank}`;
+
+    const copy = document.createElement("div");
+    copy.className = "top-area-copy";
+
+    const name = document.createElement("span");
+    name.className = "top-area-name";
+    name.textContent = row.area;
+
+    const meta = document.createElement("span");
+    meta.className = "top-area-meta";
+    meta.textContent =
+      options.metric === "PER_1000"
+        ? `Raw count ${formatMetric(row.count, "COUNT")}`
+        : "Absolute count";
+
+    copy.append(name, meta);
+
+    const value = document.createElement("span");
+    value.className = "top-area-value";
+    value.textContent = primary;
+
+    const unit = document.createElement("span");
+    unit.className = "top-area-unit";
+    unit.textContent = options.metric === "PER_1000" ? "per 1K" : "count";
+
+    item.append(rank, copy, value, unit);
     ui.topAreasList.appendChild(item);
   });
 }
@@ -664,6 +782,7 @@ async function render() {
 }
 
 async function bootstrap() {
+  updateHeroSummary();
   setCategoryOptions(state.availableCategories);
   if (!state.availableCategories.includes(state.selection.category)) {
     state.selection.category = state.availableCategories[0] || "";
@@ -716,6 +835,7 @@ async function bootstrap() {
   }
 
   updateCategoryInfoTooltip();
+  updateHeroSummary();
   if (!state.selection.snapshot) {
     setStatus("No amenity snapshots are available.", "warn");
     return;
@@ -731,6 +851,7 @@ function syncSelectionAndRender() {
   state.selection.ageGroup = ui.ageGroupSelect.value;
   ui.ageGroupSelect.disabled = state.selection.metric !== "PER_1000";
   updateCategoryInfoTooltip();
+  updateHeroSummary();
   render();
 }
 
