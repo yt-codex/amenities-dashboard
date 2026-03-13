@@ -1,4 +1,5 @@
 import { CONFIG } from "./config.js";
+import { normalizeJoinKey } from "../shared/data-contract.js";
 
 const FALLBACK_CATEGORY_ORDER = [
   "gp_clinics",
@@ -284,17 +285,7 @@ function toggleCategoryInfoTooltip(forceOpen) {
   ui.categoryInfoButton.setAttribute("aria-expanded", String(shouldOpen));
 }
 
-function normalizeName(value) {
-  // Shared join-key normalizer for both polygons and API rows.
-  // Rules: null-safe -> trim -> uppercase -> collapse non-alphanumeric to single spaces -> trim.
-  if (value === null || value === undefined) return "";
-  return String(value)
-    .trim()
-    .toUpperCase()
-    .replace(/[^A-Z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
+const normalizeName = normalizeJoinKey;
 
 function getGeoNameFromFeature(feature, geo) {
   const props = feature?.properties || {};

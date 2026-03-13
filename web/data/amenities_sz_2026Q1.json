@@ -1516,7 +1516,7 @@
     "pa": "BUKIT TIMAH",
     "sz": "LEEDON PARK",
     "category": "supermarkets",
-    "count": 1
+    "count": 2
   },
   {
     "snapshot": "2026Q1",
@@ -2132,7 +2132,7 @@
     "pa": "DOWNTOWN CORE",
     "sz": "TANJONG PAGAR",
     "category": "supermarkets",
-    "count": 2
+    "count": 1
   },
   {
     "snapshot": "2026Q1",
@@ -2706,6 +2706,13 @@
     "pa": "JURONG EAST",
     "sz": "YUHUA EAST",
     "category": "eldercare",
+    "count": 1
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "JURONG EAST",
+    "sz": "YUHUA EAST",
+    "category": "gp_clinics",
     "count": 1
   },
   {
@@ -5241,6 +5248,13 @@
     "sz": "TYERSALL",
     "category": "supermarkets",
     "count": 2
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TENGAH",
+    "sz": "PARK",
+    "category": "gp_clinics",
+    "count": 1
   },
   {
     "snapshot": "2026Q1",

@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import AdmZip from "adm-zip";
 import { parse as parseCsv } from "csv-parse/sync";
+import { normalizeJoinKey } from "../shared/data-contract.js";
 
 const ROOT = process.cwd();
 
@@ -25,6 +26,7 @@ const CONFIG = {
   ],
 
   OUTPUT_DIR: path.join(ROOT, "web", "data"),
+  PLANNING_AREA_GEOJSON_PATH: path.join(ROOT, "web", "assets", "planning_area.geojson"),
   SUBZONE_GEOJSON_PATH: path.join(ROOT, "web", "assets", "subzone.geojson"),
 
   DENOMS_INDEX_FILE: "denoms_index.json",
@@ -58,13 +60,16 @@ const CONFIG = {
   OVERPASS_TIMEOUT_SEC: 120,
   OVERPASS_RETRY_MAX: 5,
   OVERPASS_RETRY_BASE_SLEEP_MS: 1500,
+  HTTP_RETRY_MAX: 5,
+  HTTP_RETRY_BASE_SLEEP_MS: 1500,
 
-  DATAGOV_DATASTORE_SEARCH: "https://data.gov.sg/api/action/datastore_search",
+  DATAGOV_DATASET_BASE_URL: "https://api-open.data.gov.sg/v1/public/api/datasets",
   MOE_GENERAL_INFO_DATASET_ID: "d_688b934f82c1059ed0a6993d2a829089",
 
   ONEMAP_TOKEN_URL: "https://www.onemap.gov.sg/api/auth/post/getToken",
   ONEMAP_SEARCH_URL: "https://www.onemap.gov.sg/api/common/elastic/search",
   ONEMAP_TOKEN_CACHE_FILE: path.join(ROOT, ".cache", "onemap-token.json"),
+  MOE_GENERAL_INFO_CACHE_FILE: path.join(ROOT, "scripts", "cache", "moe_general_info_cache.json"),
   ONEMAP_GEOCODE_CACHE_FILE: path.join(ROOT, "scripts", "cache", "onemap_geocode_cache.json"),
 
   NAME_OVERRIDES: {},
@@ -165,16 +170,40 @@ async function updateDenominators(opts) {
     return { status: "skipped", reason: "non_denom_month" };
   }
 
-  const discovered = await discoverSingStatResidentCsvLinks();
+  const archived = await discoverArchivedResidentCsvLinks();
+  let discovered = { ...archived };
+  let discoveryError = null;
+
+  try {
+    const liveDiscovered = await discoverSingStatResidentCsvLinks();
+    discovered = { ...discovered, ...liveDiscovered };
+  } catch (error) {
+    discoveryError = error;
+    log(`SingStat discovery unavailable: ${error.message}`);
+  }
+
   const discoveredYears = Object.keys(discovered)
     .map(Number)
+    .filter(Number.isFinite)
     .sort((a, b) => a - b);
   const existing = new Set((index.vintages || []).map(Number));
+
+  if (discoveredYears.length === 0) {
+    if (existing.size > 0 && !targetYear) {
+      log("No denominator sources are currently reachable. Keeping existing local vintages.");
+      index.updated_at = new Date().toISOString();
+      await writeJson(indexPath, index);
+      return { status: "skipped", reason: "source_unavailable" };
+    }
+
+    throw discoveryError || new Error("No denominator sources are available.");
+  }
 
   let yearsToProcess = [];
   if (targetYear) {
     if (!discovered[targetYear]) {
-      throw new Error(`Could not find SingStat CSV link for target year ${targetYear}.`);
+      const extra = discoveryError ? ` Discovery error: ${discoveryError.message}` : "";
+      throw new Error(`Could not find resident CSV source for target year ${targetYear}.${extra}`);
     }
     yearsToProcess = [targetYear];
   } else {
@@ -182,10 +211,17 @@ async function updateDenominators(opts) {
   }
 
   if (yearsToProcess.length === 0) {
-    log("No new denom vintages found.");
+    if (discoveryError) {
+      log("No new denom vintages found. Upstream discovery is unavailable, so existing data was kept.");
+    } else {
+      log("No new denom vintages found.");
+    }
     index.updated_at = new Date().toISOString();
     await writeJson(indexPath, index);
-    return { status: "skipped", reason: "no_new_vintages" };
+    return {
+      status: "skipped",
+      reason: discoveryError ? "source_unavailable_or_no_new_vintages" : "no_new_vintages",
+    };
   }
 
   log(`Processing denominator vintages: ${yearsToProcess.join(", ")}`);
@@ -194,11 +230,11 @@ async function updateDenominators(opts) {
 
   for (const year of yearsToProcess) {
     const meta = discovered[year];
-    const { csvText, files, picked } = await fetchResidentCsvFromZip(meta.url, year);
-    log(`Year ${year}: ZIP files=${files.length}, picked=${picked}`);
+    const { csvText, files, picked, source } = await readResidentCsvSource(meta, year);
+    log(`Year ${year}: source=${source}, files=${files.length}, picked=${picked}`);
 
     if (CONFIG.ARCHIVE_RAW_CSV) {
-      const rawPath = path.join(CONFIG.RAW_DIR, `${CONFIG.RAW_PREFIX}${year}.csv`);
+      const rawPath = getResidentRawArchivePath(year);
       await writeText(rawPath, csvText);
     }
 
@@ -228,37 +264,39 @@ async function updateDenominators(opts) {
 }
 
 async function discoverSingStatResidentCsvLinks() {
-  const response = await fetch(CONFIG.SINGSTAT_LATEST_DATA_URL, {
-    headers: {
-      "user-agent": "amenities-dashboard-pipeline/1.0",
-      accept: "text/html,*/*",
-    },
-    redirect: "follow",
-  });
+  const candidates = Array.from(
+    new Set([CONFIG.SINGSTAT_LATEST_DATA_URL, `${CONFIG.SINGSTAT_LATEST_DATA_URL}/`])
+  );
+  let lastError = null;
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch SingStat latest data page: HTTP ${response.status}`);
-  }
+  for (const url of candidates) {
+    try {
+      const response = await fetchWithRetry(
+        url,
+        {
+          headers: {
+            "user-agent": "amenities-dashboard-pipeline/1.0",
+            accept: "text/html,*/*",
+          },
+          redirect: "follow",
+        },
+        { label: `SingStat discovery page ${url}` }
+      );
 
-  const html = await response.text();
-  const regex = /href="([^"]*respopagesex(\d{4})\.ashx)"/gi;
-  const out = {};
-  let match = null;
+      const html = await response.text();
+      const out = parseResidentCsvLinksFromHtml(html, response.url || url);
+      if (Object.keys(out).length > 0) {
+        log(`Discovered denominator years: ${Object.keys(out).sort().join(", ")}`);
+        return out;
+      }
 
-  while ((match = regex.exec(html)) !== null) {
-    const url = absolutizeUrl(match[1], CONFIG.SINGSTAT_LATEST_DATA_URL);
-    const year = Number(match[2]);
-    if (year >= 2000 && year <= 2100) {
-      out[year] = { url, label: `respopagesex${year}.ashx` };
+      lastError = new Error(`No respopagesexYYYY.ashx links found on ${response.url || url}.`);
+    } catch (error) {
+      lastError = error;
     }
   }
 
-  if (Object.keys(out).length === 0) {
-    throw new Error("No respopagesexYYYY.ashx links found on SingStat page.");
-  }
-
-  log(`Discovered denominator years: ${Object.keys(out).sort().join(", ")}`);
-  return out;
+  throw lastError || new Error("Could not discover SingStat resident CSV links.");
 }
 
 function absolutizeUrl(maybeRelative, baseUrl) {
@@ -266,18 +304,97 @@ function absolutizeUrl(maybeRelative, baseUrl) {
   return new URL(maybeRelative, baseUrl).toString();
 }
 
-async function fetchResidentCsvFromZip(url, year) {
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "amenities-dashboard-pipeline/1.0",
-      accept: "*/*",
-    },
-    redirect: "follow",
-  });
+function parseResidentCsvLinksFromHtml(html, baseUrl) {
+  const regex = /href="([^"]*respopagesex(\d{4})\.ashx)"/gi;
+  const out = {};
+  let match = null;
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch zip for year=${year}. HTTP ${response.status}. URL=${url}`);
+  while ((match = regex.exec(html)) !== null) {
+    const url = absolutizeUrl(match[1], baseUrl);
+    const year = Number(match[2]);
+    if (year >= 2000 && year <= 2100) {
+      out[year] = { url, label: `respopagesex${year}.ashx`, source: "singstat" };
+    }
   }
+
+  return out;
+}
+
+async function discoverArchivedResidentCsvLinks() {
+  const out = {};
+  let entries = [];
+
+  try {
+    entries = await fs.readdir(CONFIG.RAW_DIR, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === "ENOENT") return out;
+    throw error;
+  }
+
+  const pattern = new RegExp(`^${escapeRegex(CONFIG.RAW_PREFIX)}(\\d{4})\\.csv$`, "i");
+  for (const entry of entries) {
+    if (!entry.isFile()) continue;
+    const match = entry.name.match(pattern);
+    if (!match) continue;
+
+    const year = Number(match[1]);
+    if (!Number.isFinite(year)) continue;
+    out[year] = {
+      path: path.join(CONFIG.RAW_DIR, entry.name),
+      label: entry.name,
+      source: "raw_archive",
+    };
+  }
+
+  if (Object.keys(out).length > 0) {
+    log(`Archived denominator years: ${Object.keys(out).sort().join(", ")}`);
+  }
+
+  return out;
+}
+
+function getResidentRawArchivePath(year) {
+  return path.join(CONFIG.RAW_DIR, `${CONFIG.RAW_PREFIX}${year}.csv`);
+}
+
+async function readResidentCsvSource(meta, year) {
+  const archivePath = meta?.path || getResidentRawArchivePath(year);
+
+  if (meta?.url) {
+    try {
+      const fetched = await fetchResidentCsvFromZip(meta.url, year);
+      return { ...fetched, source: meta.source || "singstat" };
+    } catch (error) {
+      if (!(await fileExists(archivePath))) throw error;
+      log(`Year ${year}: live fetch failed (${error.message}). Falling back to archived raw CSV.`);
+    }
+  }
+
+  if (await fileExists(archivePath)) {
+    const csvText = (await fs.readFile(archivePath, "utf8")).replace(/^\uFEFF/, "");
+    return {
+      csvText,
+      files: [path.basename(archivePath)],
+      picked: path.basename(archivePath),
+      source: "raw_archive",
+    };
+  }
+
+  throw new Error(`No resident CSV source available for year=${year}.`);
+}
+
+async function fetchResidentCsvFromZip(url, year) {
+  const response = await fetchWithRetry(
+    url,
+    {
+      headers: {
+        "user-agent": "amenities-dashboard-pipeline/1.0",
+        accept: "*/*",
+      },
+      redirect: "follow",
+    },
+    { label: `SingStat ZIP ${year}` }
+  );
 
   const zipBuffer = Buffer.from(await response.arrayBuffer());
   const zip = new AdmZip(zipBuffer);
@@ -763,34 +880,82 @@ function overpassElementsToPoints(json) {
   return out;
 }
 
-async function fetchAllMoeSchoolGeneralInfo() {
-  const limit = 500;
-  let offset = 0;
-  const out = [];
-
-  while (true) {
-    const url = new URL(CONFIG.DATAGOV_DATASTORE_SEARCH);
-    url.searchParams.set("resource_id", CONFIG.MOE_GENERAL_INFO_DATASET_ID);
-    url.searchParams.set("limit", String(limit));
-    url.searchParams.set("offset", String(offset));
-
-    const response = await fetch(url.toString());
-    if (!response.ok) {
-      throw new Error(`data.gov.sg API failed: HTTP ${response.status}`);
-    }
-
-    const payload = await response.json();
-    if (!payload.success) {
-      throw new Error(`data.gov.sg API returned unsuccessful payload: ${JSON.stringify(payload).slice(0, 240)}`);
-    }
-
-    const records = payload?.result?.records || [];
-    out.push(...records);
-    if (records.length < limit) break;
-    offset += limit;
+async function requestDataGovDatasetDownloadUrl(datasetId) {
+  const headers = {
+    "user-agent": "amenities-dashboard-pipeline/1.0",
+    accept: "application/json,text/plain,*/*",
+  };
+  const initiateUrl = `${CONFIG.DATAGOV_DATASET_BASE_URL}/${datasetId}/initiate-download`;
+  const initiateResponse = await fetchWithRetry(
+    initiateUrl,
+    { headers },
+    { label: "data.gov.sg initiate-download" }
+  );
+  const initiatePayload = await initiateResponse.json();
+  if (initiatePayload?.data?.url) {
+    return String(initiatePayload.data.url);
   }
 
-  return out;
+  const pollUrl = `${CONFIG.DATAGOV_DATASET_BASE_URL}/${datasetId}/poll-download`;
+  for (let attempt = 1; attempt <= CONFIG.HTTP_RETRY_MAX; attempt += 1) {
+    const pollResponse = await fetchWithRetry(
+      pollUrl,
+      { headers },
+      { label: `data.gov.sg poll-download attempt=${attempt}` }
+    );
+    const pollPayload = await pollResponse.json();
+    const status = String(pollPayload?.data?.status || "").toUpperCase();
+    if (pollPayload?.data?.url) {
+      return String(pollPayload.data.url);
+    }
+
+    if (!["PENDING", "IN_PROGRESS"].includes(status)) {
+      throw new Error(`data.gov.sg poll-download returned unexpected status: ${status || "UNKNOWN"}`);
+    }
+
+    await sleep(computeBackoffMs(1000, attempt));
+  }
+
+  throw new Error(`data.gov.sg dataset download URL was not ready for ${datasetId}.`);
+}
+
+async function fetchAllMoeSchoolGeneralInfo() {
+  try {
+    const downloadUrl = await requestDataGovDatasetDownloadUrl(CONFIG.MOE_GENERAL_INFO_DATASET_ID);
+    const response = await fetchWithRetry(
+      downloadUrl,
+      {
+        headers: {
+          "user-agent": "amenities-dashboard-pipeline/1.0",
+          accept: "text/csv,text/plain,*/*",
+        },
+      },
+      { label: "data.gov.sg MOE dataset download" }
+    );
+    const csvText = await response.text();
+    const rows = parseCsv(csvText, {
+      bom: true,
+      columns: true,
+      skip_empty_lines: true,
+      relax_column_count: true,
+    });
+
+    if (!Array.isArray(rows) || rows.length === 0) {
+      throw new Error("data.gov.sg MOE dataset download returned no rows.");
+    }
+
+    await writeJson(CONFIG.MOE_GENERAL_INFO_CACHE_FILE, rows);
+    return rows;
+  } catch (error) {
+    const cached = await readJson(CONFIG.MOE_GENERAL_INFO_CACHE_FILE);
+    if (Array.isArray(cached) && cached.length > 0) {
+      log(
+        `data.gov.sg school dataset unavailable (${error.message}). Falling back to cache with ${cached.length} rows.`
+      );
+      return cached;
+    }
+    throw error;
+  }
 }
 
 async function buildSchoolPointsFromMoe() {
@@ -1107,6 +1272,11 @@ async function runDenomTests(year) {
   const sz = await readJson(path.join(CONFIG.OUTPUT_DIR, `${CONFIG.DENOMS_SZ_PREFIX}${year}.json`));
   if (!pa || !sz) throw new Error(`Missing denominator outputs for year=${year}`);
 
+  const joinSets = await loadBoundaryJoinSets();
+  assertRowJoinCoverage(pa, "pa", joinSets.pa, `Denominator PA ${year}`);
+  assertRowJoinCoverage(sz, "pa", joinSets.pa, `Denominator SZ ${year}`);
+  assertRowJoinCoverage(sz, "sz", joinSets.sz, `Denominator SZ ${year}`);
+
   const totalAll = pa
     .filter((row) => row.age_group === "ALL")
     .reduce((sum, row) => sum + Number(row.residents || 0), 0);
@@ -1128,7 +1298,23 @@ async function runDenomTests(year) {
     if (all < sumBands) violations += 1;
   }
 
-  log(`Denominator tests passed for ${year}. ALL>=sumBands violations=${violations}`);
+  if (violations > 0) {
+    throw new Error(`Denominator aggregation check failed for ${year}: ${violations} PA rows have ALL < sum(age bands).`);
+  }
+
+  const paAgg = buildAggregateMap(
+    pa,
+    (row) => `${normalizeJoinKey(row.pa)}||${row.age_group}`,
+    (row) => Number(row.residents || 0)
+  );
+  const szAgg = buildAggregateMap(
+    sz,
+    (row) => `${normalizeJoinKey(row.pa)}||${row.age_group}`,
+    (row) => Number(row.residents || 0)
+  );
+  assertAggregateMapsEqual(paAgg, szAgg, `Denominator PA/SZ rollup ${year}`);
+
+  log(`Denominator tests passed for ${year}. totalAll=${totalAll}`);
 }
 
 async function runAmenityTests(snapshotQuarter) {
@@ -1144,6 +1330,11 @@ async function runAmenityTests(snapshotQuarter) {
     throw new Error(`Amenity test failed. Missing snapshot outputs for ${snapshotQuarter}.`);
   }
 
+  const joinSets = await loadBoundaryJoinSets();
+  assertRowJoinCoverage(pa, "pa", joinSets.pa, `Amenity PA ${snapshotQuarter}`);
+  assertRowJoinCoverage(sz, "pa", joinSets.pa, `Amenity SZ ${snapshotQuarter}`);
+  assertRowJoinCoverage(sz, "sz", joinSets.sz, `Amenity SZ ${snapshotQuarter}`);
+
   const totalSupermarkets = sz
     .filter((row) => row.category === "supermarkets")
     .reduce((sum, row) => sum + Number(row.count || 0), 0);
@@ -1153,7 +1344,89 @@ async function runAmenityTests(snapshotQuarter) {
     );
   }
 
+  const paAgg = buildAggregateMap(
+    pa,
+    (row) => `${normalizeJoinKey(row.pa)}||${row.category}`,
+    (row) => Number(row.count || 0)
+  );
+  const szAgg = buildAggregateMap(
+    sz,
+    (row) => `${normalizeJoinKey(row.pa)}||${row.category}`,
+    (row) => Number(row.count || 0)
+  );
+  assertAggregateMapsEqual(paAgg, szAgg, `Amenity PA/SZ rollup ${snapshotQuarter}`);
+
   log(`Amenity tests passed for ${snapshotQuarter}. supermarkets=${totalSupermarkets}`);
+}
+
+async function loadBoundaryJoinSets() {
+  const paGeo = await readJson(CONFIG.PLANNING_AREA_GEOJSON_PATH);
+  const szGeo = await readJson(CONFIG.SUBZONE_GEOJSON_PATH);
+  if (!paGeo || !szGeo) {
+    throw new Error("Boundary join-set check failed: planning area or subzone GeoJSON is missing.");
+  }
+
+  return {
+    pa: buildFeatureJoinKeySet(paGeo, ["PLN_AREA_N", "PLN_AREA_NAME", "PA", "name", "NAME"]),
+    sz: buildFeatureJoinKeySet(szGeo, ["SUBZONE_N", "SUBZONE_NAME", "SZ", "name", "NAME"]),
+  };
+}
+
+function buildFeatureJoinKeySet(geojson, nameCandidates) {
+  const features = geojson?.features || [];
+  const out = new Set();
+
+  for (const feature of features) {
+    const name = pickProp(feature?.properties || {}, nameCandidates);
+    const joinKey = normalizeJoinKey(name);
+    if (joinKey) out.add(joinKey);
+  }
+
+  return out;
+}
+
+function assertRowJoinCoverage(rows, fieldName, validJoinKeys, label) {
+  const unmatched = Array.from(
+    new Set(
+      rows
+        .map((row) => row[fieldName])
+        .filter((value) => !validJoinKeys.has(normalizeJoinKey(value)))
+        .map((value) => String(value || "").trim())
+        .filter(Boolean)
+    )
+  ).sort();
+
+  if (unmatched.length > 0) {
+    const preview = unmatched.slice(0, 10).join(", ");
+    const suffix = unmatched.length > 10 ? ` (+${unmatched.length - 10} more)` : "";
+    throw new Error(`${label} join coverage failed for ${fieldName}: ${preview}${suffix}`);
+  }
+}
+
+function buildAggregateMap(rows, keyFn, valueFn) {
+  const out = new Map();
+
+  for (const row of rows) {
+    const key = keyFn(row);
+    if (!key) continue;
+    out.set(key, (out.get(key) || 0) + valueFn(row));
+  }
+
+  return out;
+}
+
+function assertAggregateMapsEqual(expected, actual, label) {
+  const allKeys = new Set([...expected.keys(), ...actual.keys()]);
+
+  for (const key of allKeys) {
+    const expectedValue = expected.get(key) || 0;
+    const actualValue = actual.get(key) || 0;
+    if (expectedValue !== actualValue) {
+      throw new Error(
+        `${label} failed for ${key}: expected=${expectedValue}, actual=${actualValue}`
+      );
+    }
+  }
 }
 
 function emptyDenomsIndex() {
@@ -1222,6 +1495,45 @@ async function fileExists(filePath) {
     if (error.code === "ENOENT") return false;
     throw error;
   }
+}
+
+async function fetchWithRetry(url, options = {}, retryOptions = {}) {
+  const {
+    label = String(url),
+    maxAttempts = CONFIG.HTTP_RETRY_MAX,
+    baseSleepMs = CONFIG.HTTP_RETRY_BASE_SLEEP_MS,
+    retryStatuses = [429, 500, 502, 503, 504],
+  } = retryOptions;
+
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) return response;
+
+      const body = await response.text().catch(() => "");
+      const error = new Error(
+        `${label} failed: HTTP ${response.status}${body ? ` ${body.slice(0, 240)}` : ""}`
+      );
+      error.retryable = retryStatuses.includes(response.status);
+      throw error;
+    } catch (error) {
+      lastError = error;
+      const isRetryable = error.retryable !== false;
+      if (!isRetryable || attempt === maxAttempts) break;
+
+      const sleepMs = computeBackoffMs(baseSleepMs, attempt);
+      log(`${label} attempt ${attempt}/${maxAttempts} failed: ${error.message}. Sleep ${sleepMs}ms`);
+      await sleep(sleepMs);
+    }
+  }
+
+  throw lastError || new Error(`${label} failed.`);
+}
+
+function computeBackoffMs(baseSleepMs, attempt) {
+  return baseSleepMs * 2 ** (attempt - 1) + Math.floor(Math.random() * 500);
 }
 
 function getMonthInTimezone(date, timeZone) {
@@ -1293,10 +1605,14 @@ function toInt(value) {
 }
 
 function normalizeName(value) {
-  let name = safeStr(value).toUpperCase().trim();
+  let name = safeStr(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+    .trim();
   name = name.replace(/\s+/g, " ");
   name = name.replace(/&/g, "AND");
-  name = name.replace(/[’']/g, "");
+  name = name.replace(/['\u2018\u2019]/g, "");
   name = name.replace(/\s*-\s*/g, "-");
   if (CONFIG.NAME_OVERRIDES[name]) return CONFIG.NAME_OVERRIDES[name];
   return name;
@@ -1314,6 +1630,10 @@ function pickProp(props, keys) {
 
 function addToMap(map, key, value) {
   map.set(key, (map.get(key) || 0) + value);
+}
+
+function escapeRegex(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function sleep(ms) {

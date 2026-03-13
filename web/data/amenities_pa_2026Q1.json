@@ -291,7 +291,7 @@
     "snapshot": "2026Q1",
     "pa": "BUKIT TIMAH",
     "category": "supermarkets",
-    "count": 13
+    "count": 14
   },
   {
     "snapshot": "2026Q1",
@@ -423,7 +423,7 @@
     "snapshot": "2026Q1",
     "pa": "DOWNTOWN CORE",
     "category": "supermarkets",
-    "count": 16
+    "count": 15
   },
   {
     "snapshot": "2026Q1",
@@ -531,7 +531,7 @@
     "snapshot": "2026Q1",
     "pa": "JURONG EAST",
     "category": "gp_clinics",
-    "count": 6
+    "count": 7
   },
   {
     "snapshot": "2026Q1",
@@ -1240,6 +1240,12 @@
     "pa": "TANGLIN",
     "category": "supermarkets",
     "count": 5
+  },
+  {
+    "snapshot": "2026Q1",
+    "pa": "TENGAH",
+    "category": "gp_clinics",
+    "count": 1
   },
   {
     "snapshot": "2026Q1",

@@ -2,7 +2,7 @@
   "snapshot": "2026Q1",
   "stats": {
     "total": {
-      "gp_clinics": 588,
+      "gp_clinics": 590,
       "dental": 212,
       "childcare_preschool": 326,
       "primary_schools": 179,
@@ -11,7 +11,7 @@
       "eldercare": 83
     },
     "assigned": {
-      "gp_clinics": 588,
+      "gp_clinics": 590,
       "dental": 212,
       "childcare_preschool": 326,
       "primary_schools": 179,
