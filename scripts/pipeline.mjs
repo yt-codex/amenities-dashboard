@@ -10,7 +10,12 @@ const CONFIG = {
   TIMEZONE: "Asia/Singapore",
 
   SINGSTAT_LATEST_DATA_URL:
-    "https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data",
+    "https://www.singstat.gov.sg/find-data/explore-data-themes/population/geographic-distribution/latest-news-data",
+  SINGSTAT_RESIDENT_SECTION_TITLE:
+    "Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex",
+  SINGSTAT_ASSET_CMS_PREFIX: "https://cms.singstat.gov.sg/assets/",
+  SINGSTAT_ASSET_CDN_PREFIX:
+    "https://assets.app.optical.gov.sg/singstat/production/published/assets/",
   DENOM_CHECK_MONTHS: [1, 7],
   AMENITY_CHECK_MONTHS: [1, 4, 7, 10],
 
@@ -305,11 +310,12 @@ function absolutizeUrl(maybeRelative, baseUrl) {
 }
 
 function parseResidentCsvLinksFromHtml(html, baseUrl) {
-  const regex = /href="([^"]*respopagesex(\d{4})\.ashx)"/gi;
   const out = {};
+
+  const legacyRegex = /href="([^"]*respopagesex(\d{4})\.ashx)"/gi;
   let match = null;
 
-  while ((match = regex.exec(html)) !== null) {
+  while ((match = legacyRegex.exec(html)) !== null) {
     const url = absolutizeUrl(match[1], baseUrl);
     const year = Number(match[2]);
     if (year >= 2000 && year <= 2100) {
@@ -317,7 +323,69 @@ function parseResidentCsvLinksFromHtml(html, baseUrl) {
     }
   }
 
+  if (Object.keys(out).length > 0) return out;
+
+  const sectionHtml = extractSingStatResidentSectionHtml(html);
+  if (!sectionHtml) return out;
+
+  const linkRegex = /<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+  while ((match = linkRegex.exec(sectionHtml)) !== null) {
+    const rawHref = absolutizeUrl(match[1], baseUrl);
+    const href = rewriteSingStatAssetUrl(rawHref);
+    const text = stripHtml(match[2]).replace(/\s+/g, " ").trim();
+    if (!/csv/i.test(text)) continue;
+
+    const years = parseSingStatYearsFromLinkText(text);
+    for (const year of years) {
+      out[year] = {
+        url: href,
+        label: text,
+        source: "singstat",
+      };
+    }
+  }
+
   return out;
+}
+
+function extractSingStatResidentSectionHtml(html) {
+  const title = CONFIG.SINGSTAT_RESIDENT_SECTION_TITLE;
+  const start = html.indexOf(title);
+  if (start < 0) return "";
+
+  const nextAccordion = html.indexOf('accordion__title', start + title.length);
+  const nextLatestData = html.indexOf('Detailed Statistical Time Series', start + title.length);
+  const endCandidates = [nextAccordion, nextLatestData].filter((value) => value > start);
+  const end = endCandidates.length > 0 ? Math.min(...endCandidates) : Math.min(html.length, start + 12000);
+  return html.slice(start, end);
+}
+
+function rewriteSingStatAssetUrl(url) {
+  if (String(url).startsWith(CONFIG.SINGSTAT_ASSET_CMS_PREFIX)) {
+    return `${CONFIG.SINGSTAT_ASSET_CDN_PREFIX}${String(url).slice(CONFIG.SINGSTAT_ASSET_CMS_PREFIX.length)}`;
+  }
+  return url;
+}
+
+function parseSingStatYearsFromLinkText(text) {
+  const normalized = String(text || "").replace(/\u00a0/g, " ").trim();
+  const rangeMatch = normalized.match(/(20\d{2})\s*-\s*(20\d{2})/);
+  if (rangeMatch) {
+    const startYear = Number(rangeMatch[1]);
+    const endYear = Number(rangeMatch[2]);
+    if (Number.isFinite(startYear) && Number.isFinite(endYear) && endYear >= startYear) {
+      const years = [];
+      for (let year = startYear; year <= endYear; year += 1) years.push(year);
+      return years;
+    }
+  }
+
+  const singleMatch = normalized.match(/(20\d{2})/);
+  return singleMatch ? [Number(singleMatch[1])] : [];
+}
+
+function stripHtml(value) {
+  return String(value || "").replace(/<[^>]+>/g, "");
 }
 
 async function discoverArchivedResidentCsvLinks() {
