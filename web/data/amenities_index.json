@@ -1,8 +1,9 @@
 {
-  "updated_at": "2026-03-13T16:28:35.104Z",
+  "updated_at": "2026-04-01T06:17:59.660Z",
   "source": "overpass+moe_onemap",
   "snapshots": [
-    "2026Q1"
+    "2026Q1",
+    "2026Q2"
   ],
   "categories": [
     "gp_clinics",
