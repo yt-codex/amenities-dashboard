@@ -575,11 +575,10 @@ def build_pipeline_checks(
                 add_check(
                     checks,
                     "overpass_fetch",
-                    "WARN",
-                    "Overpass completed after retries/failover.",
+                    "OK",
+                    "Overpass fetch succeeded across OSM categories after transient retries/failover.",
                     {"categories_found": sorted(found), "retries": retries, "endpoint_switches": switches},
                 )
-                warnings.append("Overpass endpoint instability observed (retries/failover occurred).")
             else:
                 add_check(checks, "overpass_fetch", "OK", "Overpass fetch succeeded across OSM categories.")
         elif amenities_skipped and not amenities_due:

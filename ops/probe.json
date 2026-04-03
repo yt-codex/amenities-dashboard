@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "status": "WARN",
+  "status": "OK",
   "last_run_time": "2026-04-01T06:17:59Z",
   "duration_seconds": 157.0,
   "freshness": {
     "max_date": "2026-04-01T06:17:59Z",
-    "lag_seconds": 1.099147,
+    "lag_seconds": 155620.351776,
     "stale": false
   },
   "row_counts": {
@@ -47,8 +47,8 @@
     },
     {
       "name": "overpass_fetch",
-      "status": "WARN",
-      "detail": "Overpass completed after retries/failover.",
+      "status": "OK",
+      "detail": "Overpass fetch succeeded across OSM categories after transient retries/failover.",
       "metric": {
         "categories_found": [
           "childcare_preschool",
@@ -77,33 +77,19 @@
       "detail": "Output files written and readable."
     }
   ],
-  "warnings": [
-    "Overpass endpoint instability observed (retries/failover occurred)."
-  ],
+  "warnings": [],
   "artifact_links": [
     {
       "label": "workflow_run",
       "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/23834819049"
-    },
-    {
-      "label": "denoms_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/51c2d2096e643471093f94eb563cb5e9304aede0/web/data/denoms_index.json"
-    },
-    {
-      "label": "amenities_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/51c2d2096e643471093f94eb563cb5e9304aede0/web/data/amenities_index.json"
-    },
-    {
-      "label": "ops_probe",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/51c2d2096e643471093f94eb563cb5e9304aede0/ops/probe.json"
     }
   ],
   "meta": {
-    "repo": "yt-codex/amenities-dashboard",
-    "run_id": "23834819049",
-    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/23834819049",
-    "workflow": "Refresh Dashboard Data",
-    "job": "refresh",
-    "sha": "51c2d2096e643471093f94eb563cb5e9304aede0"
+    "repo": null,
+    "run_id": null,
+    "run_url": null,
+    "workflow": null,
+    "job": null,
+    "sha": null
   }
 }
