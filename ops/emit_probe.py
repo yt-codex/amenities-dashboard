@@ -7,7 +7,7 @@ import json
 import os
 import re
 import sys
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +21,10 @@ DENOM_CHECK_MONTHS = {1, 7}
 AMENITY_CHECK_MONTHS = {1, 4, 7, 10}
 OSM_CATEGORIES = {"gp_clinics", "dental", "childcare_preschool", "supermarkets", "eldercare"}
 DEFAULT_STALE_AFTER_SECONDS = 120 * 24 * 3600
+AMENITY_REFRESH_TZ = "Asia/Singapore"
+AMENITY_REFRESH_HOUR = 8
+AMENITY_REFRESH_MINUTE = 15
+AMENITY_REFRESH_GRACE_HOURS = 2
 
 
 def now_utc() -> datetime:
@@ -122,6 +126,83 @@ def latest_snapshot(values: Any) -> str | None:
             best_key = key
             best_raw = str(value)
     return best_raw
+
+
+def snapshot_for_month(year: int, month: int) -> str:
+    quarter = ((month - 1) // 3) + 1
+    return f"{year}Q{quarter}"
+
+
+def previous_snapshot(snapshot: str) -> str | None:
+    parsed = parse_snapshot(snapshot)
+    if parsed is None:
+        return None
+    year, quarter = parsed
+    if quarter == 1:
+        return f"{year - 1}Q4"
+    return f"{year}Q{quarter - 1}"
+
+
+def amenity_refresh_deadline(reference: datetime) -> datetime:
+    if ZoneInfo is None:
+        local = reference.astimezone(timezone.utc)
+        tz = timezone.utc
+    else:
+        tz = ZoneInfo(AMENITY_REFRESH_TZ)
+        local = reference.astimezone(tz)
+    quarter_start_month = (((local.month - 1) // 3) * 3) + 1
+    scheduled = datetime.combine(
+        date(local.year, quarter_start_month, 1),
+        time(AMENITY_REFRESH_HOUR, AMENITY_REFRESH_MINUTE),
+        tzinfo=tz,
+    )
+    return scheduled + timedelta(hours=AMENITY_REFRESH_GRACE_HOURS)
+
+
+def expected_amenity_snapshot(reference: datetime) -> str:
+    if ZoneInfo is None:
+        local = reference.astimezone(timezone.utc)
+    else:
+        local = reference.astimezone(ZoneInfo(AMENITY_REFRESH_TZ))
+    current = snapshot_for_month(local.year, local.month)
+    if local < amenity_refresh_deadline(reference):
+        return previous_snapshot(current) or current
+    return current
+
+
+def is_amenity_refresh_due(reference: datetime) -> bool:
+    if ZoneInfo is None:
+        local = reference.astimezone(timezone.utc)
+    else:
+        local = reference.astimezone(ZoneInfo(AMENITY_REFRESH_TZ))
+    return local.month in AMENITY_CHECK_MONTHS and local.day == 1 and local >= amenity_refresh_deadline(reference)
+
+
+def next_amenity_refresh_time(reference: datetime) -> datetime:
+    if ZoneInfo is None:
+        local = reference.astimezone(timezone.utc)
+        tz = timezone.utc
+    else:
+        tz = ZoneInfo(AMENITY_REFRESH_TZ)
+        local = reference.astimezone(tz)
+    quarter_start_month = (((local.month - 1) // 3) * 3) + 1
+    scheduled = datetime.combine(
+        date(local.year, quarter_start_month, 1),
+        time(AMENITY_REFRESH_HOUR, AMENITY_REFRESH_MINUTE),
+        tzinfo=tz,
+    )
+    if local < scheduled:
+        return scheduled.astimezone(timezone.utc)
+    next_month = quarter_start_month + 3
+    year = local.year
+    if next_month > 12:
+        next_month -= 12
+        year += 1
+    return datetime.combine(
+        date(year, next_month, 1),
+        time(AMENITY_REFRESH_HOUR, AMENITY_REFRESH_MINUTE),
+        tzinfo=tz,
+    ).astimezone(timezone.utc)
 
 
 def read_json_file(path: Path) -> tuple[Any | None, str | None]:
@@ -766,7 +847,7 @@ def build_probe(args: argparse.Namespace) -> dict[str, Any]:
     amenities_due = (
         parse_bool(args.force_amenities)
         or bool(str(args.target_snapshot or "").strip())
-        or run_month in AMENITY_CHECK_MONTHS
+        or is_amenity_refresh_due(last_run)
     )
 
     key_checks, computed_warnings = build_pipeline_checks(
@@ -785,11 +866,21 @@ def build_probe(args: argparse.Namespace) -> dict[str, Any]:
     max_date_value = args.max_date or iso_utc(repo_state.get("max_updated_at"))
     max_dt = parse_dt(max_date_value)
     lag_seconds = max(0.0, (current - max_dt).total_seconds()) if max_dt else None
-    stale_after = int(args.stale_after_seconds or DEFAULT_STALE_AFTER_SECONDS)
-    stale = lag_seconds is not None and lag_seconds > stale_after
+    latest_amenity_snapshot = repo_state.get("latest_snapshot")
+    expected_snapshot = expected_amenity_snapshot(last_run)
+    latest_snapshot_key = parse_snapshot(latest_amenity_snapshot)
+    expected_snapshot_key = parse_snapshot(expected_snapshot)
+    stale = (
+        latest_snapshot_key is None
+        or (expected_snapshot_key is not None and latest_snapshot_key < expected_snapshot_key)
+    )
     if stale:
         warnings = dedupe_strings(
-            warnings + [f"Data freshness lag is high ({int(lag_seconds)}s > {stale_after}s threshold)."]
+            warnings
+            + [
+                f"Amenity snapshot is behind the scheduled quarterly refresh "
+                f"(latest={latest_amenity_snapshot or 'none'}, expected={expected_snapshot})."
+            ]
         )
     if max_dt is None:
         warnings = dedupe_strings(warnings + ["Freshness max_date is unavailable from index files."])
@@ -812,7 +903,11 @@ def build_probe(args: argparse.Namespace) -> dict[str, Any]:
         "freshness": {
             "max_date": max_date_value,
             "lag_seconds": lag_seconds,
-            "stale": bool(stale) if max_dt else None,
+            "stale": bool(stale),
+            "latest_amenity_snapshot": latest_amenity_snapshot,
+            "expected_amenity_snapshot": expected_snapshot,
+            "next_amenity_refresh_time": iso_utc(next_amenity_refresh_time(last_run)),
+            "schedule": "quarterly on Jan/Apr/Jul/Oct 1 at 08:15 Asia/Singapore",
         },
         "row_counts": row_counts,
         "schema_hash": schema_hash(args.schema_file, args.schema_hash, repo_state.get("schema_fingerprint")),
