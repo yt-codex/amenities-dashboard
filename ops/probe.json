@@ -1,12 +1,16 @@
 {
   "schema_version": "1.0",
   "status": "OK",
-  "last_run_time": "2026-05-01T04:12:39Z",
-  "duration_seconds": 1.0,
+  "last_run_time": "2026-06-01T05:12:20Z",
+  "duration_seconds": 0.0,
   "freshness": {
     "max_date": "2026-04-01T06:17:59Z",
-    "lag_seconds": 2584480.281569,
-    "stale": false
+    "lag_seconds": 5266462.527777,
+    "stale": false,
+    "latest_amenity_snapshot": "2026Q2",
+    "expected_amenity_snapshot": "2026Q2",
+    "next_amenity_refresh_time": "2026-07-01T00:15:00Z",
+    "schedule": "quarterly on Jan/Apr/Jul/Oct 1 at 08:15 Asia/Singapore"
   },
   "row_counts": {
     "denoms_vintages": 5,
@@ -64,27 +68,27 @@
   "artifact_links": [
     {
       "label": "workflow_run",
-      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/25201863013"
+      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/26736455640"
     },
     {
       "label": "denoms_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/849e7a1b9fecd419b973b7ac3f628b09b8f0da05/web/data/denoms_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/48c3d886189fe13c8ce6bff9380facec4567e499/web/data/denoms_index.json"
     },
     {
       "label": "amenities_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/849e7a1b9fecd419b973b7ac3f628b09b8f0da05/web/data/amenities_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/48c3d886189fe13c8ce6bff9380facec4567e499/web/data/amenities_index.json"
     },
     {
       "label": "ops_probe",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/849e7a1b9fecd419b973b7ac3f628b09b8f0da05/ops/probe.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/48c3d886189fe13c8ce6bff9380facec4567e499/ops/probe.json"
     }
   ],
   "meta": {
     "repo": "yt-codex/amenities-dashboard",
-    "run_id": "25201863013",
-    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/25201863013",
+    "run_id": "26736455640",
+    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/26736455640",
     "workflow": "Refresh Dashboard Data",
     "job": "refresh",
-    "sha": "849e7a1b9fecd419b973b7ac3f628b09b8f0da05"
+    "sha": "48c3d886189fe13c8ce6bff9380facec4567e499"
   }
 }
