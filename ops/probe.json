@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "status": "OK",
-  "last_run_time": "2026-07-01T04:52:14Z",
-  "duration_seconds": 111.0,
+  "last_run_time": "2026-08-01T03:45:37Z",
+  "duration_seconds": 0.0,
   "freshness": {
     "max_date": "2026-07-01T04:52:14Z",
-    "lag_seconds": 0.7489,
+    "lag_seconds": 2674403.866306,
     "stale": false,
     "latest_amenity_snapshot": "2026Q3",
     "expected_amenity_snapshot": "2026Q3",
@@ -26,61 +26,37 @@
     {
       "name": "singstat_discovery",
       "status": "OK",
-      "detail": "SingStat denominator links discovered.",
-      "metric": {
-        "years": 26
-      }
+      "detail": "Denominator refresh not due this month."
     },
     {
       "name": "singstat_fetch_parse",
       "status": "OK",
-      "detail": "SingStat ZIP/CSV parse succeeded.",
-      "metric": {
-        "rows": 589498,
-        "dropped": 0
-      }
+      "detail": "Denominator fetch/parse not due this month."
     },
     {
       "name": "moe_datagov_fetch",
       "status": "OK",
-      "detail": "MOE datastore fetch succeeded."
+      "detail": "Amenities refresh not due this month."
     },
     {
       "name": "onemap_auth_geocode",
       "status": "OK",
-      "detail": "OneMap auth/geocode completed with measured success rate.",
-      "metric": {
-        "eligible": 312,
-        "resolved": 312,
-        "unresolved": 0,
-        "success_rate": 1.0
-      }
+      "detail": "OneMap geocoding not due this month."
     },
     {
       "name": "overpass_fetch",
       "status": "OK",
-      "detail": "Overpass fetch succeeded across OSM categories after transient retries/failover.",
-      "metric": {
-        "categories_found": [
-          "childcare_preschool",
-          "dental",
-          "eldercare",
-          "gp_clinics",
-          "supermarkets"
-        ],
-        "retries": 1,
-        "endpoint_switches": 0
-      }
+      "detail": "Overpass fetch not due this month."
     },
     {
       "name": "denom_tests",
       "status": "OK",
-      "detail": "Denominator tests passed."
+      "detail": "Denominator tests skipped because refresh is not due."
     },
     {
       "name": "amenity_tests",
       "status": "OK",
-      "detail": "Amenity tests passed."
+      "detail": "Amenity tests skipped because refresh is not due."
     },
     {
       "name": "output_write",
@@ -92,27 +68,27 @@
   "artifact_links": [
     {
       "label": "workflow_run",
-      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/28494314049"
+      "url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/30682607106"
     },
     {
       "label": "denoms_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/3de54ced581c714c349219f991d2407f43722846/web/data/denoms_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/aafa434bb035db01d16c4d8ffae6951e293f0d70/web/data/denoms_index.json"
     },
     {
       "label": "amenities_index",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/3de54ced581c714c349219f991d2407f43722846/web/data/amenities_index.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/aafa434bb035db01d16c4d8ffae6951e293f0d70/web/data/amenities_index.json"
     },
     {
       "label": "ops_probe",
-      "url": "https://github.com/yt-codex/amenities-dashboard/blob/3de54ced581c714c349219f991d2407f43722846/ops/probe.json"
+      "url": "https://github.com/yt-codex/amenities-dashboard/blob/aafa434bb035db01d16c4d8ffae6951e293f0d70/ops/probe.json"
     }
   ],
   "meta": {
     "repo": "yt-codex/amenities-dashboard",
-    "run_id": "28494314049",
-    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/28494314049",
+    "run_id": "30682607106",
+    "run_url": "https://github.com/yt-codex/amenities-dashboard/actions/runs/30682607106",
     "workflow": "Refresh Dashboard Data",
     "job": "refresh",
-    "sha": "3de54ced581c714c349219f991d2407f43722846"
+    "sha": "aafa434bb035db01d16c4d8ffae6951e293f0d70"
   }
 }
